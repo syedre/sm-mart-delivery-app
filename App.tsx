@@ -1,6 +1,12 @@
 import React, { useEffect, useState } from "react";
 import "./src/lib/firebase";
-import auth, { FirebaseAuthTypes } from "@react-native-firebase/auth";
+import {
+  getAuth,
+  onAuthStateChanged,
+  signInWithPhoneNumber,
+  signOut,
+  type FirebaseAuthTypes,
+} from "@react-native-firebase/auth";
 import {
   ActivityIndicator,
   Alert,
@@ -37,6 +43,7 @@ export default function App() {
   const [verificationCode, setVerificationCode] = useState("");
   const [confirmation, setConfirmation] = useState<FirebaseAuthTypes.ConfirmationResult | null>(null);
   const [authInitializing, setAuthInitializing] = useState(true);
+  const [authError, setAuthError] = useState<string | null>(null);
   const [selectedOrder, setSelectedOrder] = useState<DeliveryOrder | null>(null);
   const [activeOrderId, setActiveOrderId] = useState<string | null>(null);
   const [locationText, setLocationText] = useState("Location not started");
@@ -46,16 +53,32 @@ export default function App() {
   const activeOrder = SAMPLE_ORDERS.find((order) => order.id === activeOrderId);
 
   useEffect(() => {
-    const unsubscribe = auth().onAuthStateChanged((user) => {
-      if (user) {
-        setPartnerName(user.phoneNumber || "SM mart Delivery Partner");
-        setScreen("orders");
-      } else {
-        setScreen("login");
-      }
+    let unsubscribe: (() => void) | undefined;
+    let mounted = true;
+
+    try {
+      const authInstance = getAuth();
+      unsubscribe = onAuthStateChanged(authInstance, (user) => {
+        if (!mounted) return;
+        if (user) {
+          setPartnerName(user.phoneNumber || "SM mart Delivery Partner");
+          setScreen("orders");
+        } else {
+          setScreen("login");
+        }
+        setAuthError(null);
+        setAuthInitializing(false);
+      });
+    } catch (error) {
+      const message = error instanceof Error ? error.message : "Firebase Authentication could not initialize.";
+      setAuthError(message);
       setAuthInitializing(false);
-    });
-    return unsubscribe;
+    }
+
+    return () => {
+      mounted = false;
+      unsubscribe?.();
+    };
   }, []);
 
   useEffect(() => {
@@ -100,7 +123,7 @@ export default function App() {
     }
     setBusy(true);
     try {
-      const result = await auth().signInWithPhoneNumber(`+91${digits}`);
+      const result = await signInWithPhoneNumber(getAuth(), `+91${digits}`);
       setConfirmation(result);
       setVerificationCode("");
       setScreen("verify");
@@ -149,7 +172,7 @@ export default function App() {
 
   const handleSignOut = async () => {
     try {
-      await auth().signOut();
+      await signOut(getAuth());
       setCompletedIds([]);
     } catch {
       Alert.alert("Sign out failed", "Please try again.");
@@ -166,7 +189,10 @@ export default function App() {
       }
       setActiveOrderId(order.id);
       setSelectedOrder(order);
+      setLocationText("Starting GPS…");
       setScreen("active");
+    } catch {
+      Alert.alert("Unable to start delivery", "Please check location permission and try again.");
     } finally {
       setBusy(false);
     }
@@ -218,6 +244,7 @@ export default function App() {
             {busy ? <ActivityIndicator color="#fff" /> : <Text style={styles.primaryButtonText}>Send verification code</Text>}
           </TouchableOpacity>
           <Text style={styles.demoNote}>Secure sign-in powered by Firebase</Text>
+          {authError ? <Text style={styles.authError}>Firebase sign-in is unavailable: {authError}</Text> : null}
         </View>
       </SafeAreaView>
     );
@@ -380,6 +407,7 @@ const styles = StyleSheet.create({
   primaryButton: { height: 54, borderRadius: 14, backgroundColor: COLORS.primary, alignItems: "center", justifyContent: "center", marginTop: 18 },
   primaryButtonText: { color: "#fff", fontSize: 15, fontWeight: "700" },
   demoNote: { color: COLORS.muted, fontSize: 12, textAlign: "center", marginTop: 14 },
+  authError: { color: "#b42318", fontSize: 11, lineHeight: 16, textAlign: "center", marginTop: 10 },
   content: { padding: 20, paddingBottom: 40 },
   greeting: { flexDirection: "row", justifyContent: "space-between", alignItems: "center", marginTop: 8, marginBottom: 20 },
   eyebrow: { color: COLORS.muted, fontSize: 10, fontWeight: "800", letterSpacing: 1.2 },
