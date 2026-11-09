@@ -46,7 +46,7 @@
             "useFrameworks": "dynamic"
           },
           "android": {
-            "kotlinVersion": "2.4.0"
+            "kotlinVersion": "2.3.20"
           }
         }
       ]
