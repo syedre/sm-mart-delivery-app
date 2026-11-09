@@ -1,0 +1,60 @@
+{
+  "rules": {
+    "deliverySessions": {
+      "$orderId": {
+        ".read": "auth != null && data.child('partnerUid').val() === auth.uid",
+        ".write": "auth != null && ((!data.exists() && newData.child('partnerUid').val() === auth.uid) || data.child('partnerUid').val() === auth.uid)",
+        ".validate": "newData.hasChildren(['orderId', 'partnerUid', 'status'])",
+        "partnerUid": {
+          ".validate": "newData.isString() && newData.val() === auth.uid"
+        },
+        "orderId": {
+          ".validate": "newData.isString()"
+        },
+        "displayId": {
+          ".validate": "newData.isString()"
+        },
+        "partnerName": {
+          ".validate": "newData.isString()"
+        },
+        "status": {
+          ".validate": "newData.isString() && (newData.val() === 'in_progress' || newData.val() === 'delivered')"
+        },
+        "startedAt": {
+          ".validate": "newData.isNumber()"
+        },
+        "completedAt": {
+          ".validate": "newData.isNumber()"
+        },
+        "lastUpdatedAt": {
+          ".validate": "newData.isNumber()"
+        },
+        "location": {
+          "latitude": {
+            ".validate": "newData.isNumber() && newData.val() >= -90 && newData.val() <= 90"
+          },
+          "longitude": {
+            ".validate": "newData.isNumber() && newData.val() >= -180 && newData.val() <= 180"
+          },
+          "accuracy": {
+            ".validate": "newData.isNumber() || newData.val() === null"
+          },
+          "heading": {
+            ".validate": "newData.isNumber() || newData.val() === null"
+          },
+          "speed": {
+            ".validate": "newData.isNumber() || newData.val() === null"
+          },
+          "updatedAt": {
+            ".validate": "newData.isNumber()"
+          }
+        },
+        "tracking": {
+          "active": {
+            ".validate": "newData.isBoolean()"
+          }
+        }
+      }
+    }
+  }
+}
