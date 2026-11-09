@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import database from "@react-native-firebase/database";
 import {
   getAuth,
   onAuthStateChanged,
@@ -102,9 +103,27 @@ function AppContent() {
         },
         (position) => {
           if (!mounted) return;
+          const latitude = position.coords.latitude;
+          const longitude = position.coords.longitude;
           setLocationText(
-            `GPS active · ${position.coords.latitude.toFixed(5)}, ${position.coords.longitude.toFixed(5)}`
+            `GPS active · ${latitude.toFixed(5)}, ${longitude.toFixed(5)}`
           );
+          database()
+            .ref(`/deliverySessions/${activeOrderId}`)
+            .update({
+              location: {
+                latitude,
+                longitude,
+                accuracy: position.coords.accuracy ?? null,
+                heading: position.coords.heading ?? null,
+                speed: position.coords.speed ?? null,
+                updatedAt: Date.now(),
+              },
+              lastUpdatedAt: Date.now(),
+            })
+            .catch(() => {
+              if (mounted) setLocationText("GPS active · cloud sync failed");
+            });
         }
       );
     })().catch(() => {
@@ -181,9 +200,27 @@ function AppContent() {
         Alert.alert("Location required", "Allow location access to start a delivery.");
         return;
       }
+      const user = getAuth().currentUser;
+      if (!user) {
+        Alert.alert("Sign in required", "Please sign in again before starting a delivery.");
+        return;
+      }
+
+      await database().ref(`/deliverySessions/${order.id}`).set({
+        orderId: order.id,
+        displayId: order.displayId,
+        partnerUid: user.uid,
+        partnerName: partnerName,
+        status: "in_progress",
+        startedAt: Date.now(),
+        lastUpdatedAt: Date.now(),
+        tracking: { active: true },
+        location: null,
+      });
+
       setActiveOrderId(order.id);
       setSelectedOrder(order);
-      setLocationText("Starting GPS…");
+      setLocationText("Starting GPS and cloud tracking…");
       setScreen("active");
     } catch {
       Alert.alert("Unable to start delivery", "Please check location permission and try again.");
@@ -192,14 +229,30 @@ function AppContent() {
     }
   };
 
-  const completeDelivery = () => {
+  const completeDelivery = async () => {
     if (!activeOrderId) return;
-    setCompletedIds((current) => [...current, activeOrderId]);
-    setActiveOrderId(null);
-    setSelectedOrder(null);
-    setLocationText("Tracking stopped");
-    setScreen("orders");
-    Alert.alert("Demo delivery completed", "This only updates the local demo state. No production order was changed.");
+    setBusy(true);
+    try {
+      await database().ref(`/deliverySessions/${activeOrderId}`).update({
+        status: "delivered",
+        completedAt: Date.now(),
+        lastUpdatedAt: Date.now(),
+        tracking: { active: false },
+      });
+      setCompletedIds((current) => [...current, activeOrderId]);
+      setActiveOrderId(null);
+      setSelectedOrder(null);
+      setLocationText("Tracking stopped");
+      setScreen("orders");
+      Alert.alert(
+        "Delivery completed",
+        "The delivery status was saved to the separate SM mart Delivery Firebase database. No customer-app or production order data was changed."
+      );
+    } catch {
+      Alert.alert("Update failed", "Could not save the delivery status. Check your connection and try again.");
+    } finally {
+      setBusy(false);
+    }
   };
 
   const Header = ({ title, back }: { title: string; back?: () => void }) => (
@@ -364,7 +417,7 @@ function AppContent() {
           <TouchableOpacity style={styles.primaryButton} onPress={completeDelivery}>
             <Text style={styles.primaryButtonText}>Mark as delivered</Text>
           </TouchableOpacity>
-          <Text style={styles.disclaimer}>Demo only: location is displayed on this device and is not transmitted to customers.</Text>
+          <Text style={styles.disclaimer}>GPS and delivery status are saved to the separate delivery Firebase database. Customer-app tracking is not connected yet.</Text>
         </View>
       </SafeAreaView>
     );
