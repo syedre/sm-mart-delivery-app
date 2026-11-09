@@ -14,12 +14,13 @@
     "expo": "~57.0.0",
     "expo-location": "~57.0.0",
     "expo-task-manager": "~57.0.0",
-    "react": "19.2.0",
+    "react": "19.2.3",
     "react-native": "0.86.3",
-    "react-native-maps": "1.27.2"
+    "react-native-maps": "1.27.2",
+    "firebase": "^12.5.0"
   },
   "devDependencies": {
     "@types/react": "~19.2.0",
-    "typescript": "~5.9.2"
+    "typescript": "~6.0.3"
   }
 }
