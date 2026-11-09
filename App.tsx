@@ -10,7 +10,6 @@ import {
 import {
   ActivityIndicator,
   Alert,
-  SafeAreaView,
   ScrollView,
   StatusBar,
   StyleSheet,
@@ -21,6 +20,7 @@ import {
 } from "react-native";
 import MapView, { Marker } from "react-native-maps";
 import * as Location from "expo-location";
+import { SafeAreaView } from "react-native-safe-area-context";
 import { SAMPLE_ORDERS, DeliveryOrder } from "./src/data/orders";
 
 type Screen = "login" | "verify" | "orders" | "details" | "active";
