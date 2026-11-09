@@ -23,9 +23,8 @@ import { SAMPLE_ORDERS, type DeliveryOrder } from "./src/data/orders";
 
 type Screen = "login" | "orders" | "details" | "active";
 
-// Delivery partner usernames are mapped to Firebase Auth's email/password identifier.
-// The reserved .invalid domain is not a real mailbox and is never used for email delivery.
-const USERNAME_EMAIL_DOMAIN = "@partners.smmart.invalid";
+// Delivery partner usernames are mapped to the email domain used for Firebase Auth accounts.
+const USERNAME_EMAIL_DOMAIN = "@smmart.com";
 const usernameToAuthEmail = (username: string) =>
   `${username.trim().toLowerCase()}${USERNAME_EMAIL_DOMAIN}`;
 
