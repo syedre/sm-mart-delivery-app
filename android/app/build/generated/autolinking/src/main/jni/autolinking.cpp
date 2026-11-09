@@ -7,16 +7,37 @@
  */
 
 #include "autolinking.h"
+#include <RNFBAppTurboModules.h>
+#include <RNFBAuthTurboModules.h>
+#include <RNFBDatabaseTurboModules.h>
 #include <RNMapsSpecs.h>
 #include <react/renderer/components/RNMapsSpecs/ComponentDescriptors.h>
+#include <safeareacontext.h>
+#include <react/renderer/components/safeareacontext/ComponentDescriptors.h>
 
 namespace facebook {
 namespace react {
 
 std::shared_ptr<TurboModule> autolinking_ModuleProvider(const std::string moduleName, const JavaTurboModule::InitParams &params) {
+auto module_RNFBAppTurboModules = RNFBAppTurboModules_ModuleProvider(moduleName, params);
+if (module_RNFBAppTurboModules != nullptr) {
+return module_RNFBAppTurboModules;
+}
+auto module_RNFBAuthTurboModules = RNFBAuthTurboModules_ModuleProvider(moduleName, params);
+if (module_RNFBAuthTurboModules != nullptr) {
+return module_RNFBAuthTurboModules;
+}
+auto module_RNFBDatabaseTurboModules = RNFBDatabaseTurboModules_ModuleProvider(moduleName, params);
+if (module_RNFBDatabaseTurboModules != nullptr) {
+return module_RNFBDatabaseTurboModules;
+}
 auto module_RNMapsSpecs = RNMapsSpecs_ModuleProvider(moduleName, params);
 if (module_RNMapsSpecs != nullptr) {
 return module_RNMapsSpecs;
+}
+auto module_safeareacontext = safeareacontext_ModuleProvider(moduleName, params);
+if (module_safeareacontext != nullptr) {
+return module_safeareacontext;
 }
   return nullptr;
 }
@@ -37,6 +58,8 @@ providerRegistry->add(concreteComponentDescriptorProvider<RNMapsOverlayComponent
 providerRegistry->add(concreteComponentDescriptorProvider<RNMapsPolylineComponentDescriptor>());
 providerRegistry->add(concreteComponentDescriptorProvider<RNMapsUrlTileComponentDescriptor>());
 providerRegistry->add(concreteComponentDescriptorProvider<RNMapsWMSTileComponentDescriptor>());
+providerRegistry->add(concreteComponentDescriptorProvider<RNCSafeAreaProviderComponentDescriptor>());
+providerRegistry->add(concreteComponentDescriptorProvider<RNCSafeAreaViewComponentDescriptor>());
   return;
 }
 

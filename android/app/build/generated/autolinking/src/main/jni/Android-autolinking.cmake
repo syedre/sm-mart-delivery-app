@@ -6,10 +6,18 @@ set(CMAKE_VERBOSE_MAKEFILE on)
 # or link against a old prefab target (this is needed for React Native 0.76 on).
 set(REACTNATIVE_MERGED_SO true)
 
+add_subdirectory("/Users/rehan/Desktop/project/sm-mart-delivery-app/node_modules/@react-native-firebase/app/android/src/reactnative/java/io/invertase/firebase/app/generated/jni/" RNFBAppTurboModules_autolinked_build)
+add_subdirectory("/Users/rehan/Desktop/project/sm-mart-delivery-app/node_modules/@react-native-firebase/auth/android/src/main/java/io/invertase/firebase/auth/generated/jni/" RNFBAuthTurboModules_autolinked_build)
+add_subdirectory("/Users/rehan/Desktop/project/sm-mart-delivery-app/node_modules/@react-native-firebase/database/android/src/reactnative/java/io/invertase/firebase/database/generated/jni/" RNFBDatabaseTurboModules_autolinked_build)
 
 add_subdirectory("/Users/rehan/Desktop/project/sm-mart-delivery-app/node_modules/react-native-maps/android/src/main/jni/" RNMapsSpecs_autolinked_build)
+add_subdirectory("/Users/rehan/Desktop/project/sm-mart-delivery-app/node_modules/react-native-safe-area-context/android/src/main/jni/" safeareacontext_autolinked_build)
 
 set(AUTOLINKED_LIBRARIES
+  react_codegen_RNFBAppTurboModules
+  react_codegen_RNFBAuthTurboModules
+  react_codegen_RNFBDatabaseTurboModules
   
   react_codegen_RNMapsSpecs
+  react_codegen_safeareacontext
 )

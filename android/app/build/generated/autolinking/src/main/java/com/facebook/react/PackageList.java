@@ -55,10 +55,18 @@ public class PackageList {
   public ArrayList<ReactPackage> getPackages() {
     return new ArrayList<>(Arrays.<ReactPackage>asList(
       new MainReactPackage(mConfig),
+      // @react-native-firebase/app
+      new io.invertase.firebase.app.ReactNativeFirebaseAppPackage(),
+      // @react-native-firebase/auth
+      new io.invertase.firebase.auth.ReactNativeFirebaseAuthPackage(),
+      // @react-native-firebase/database
+      new io.invertase.firebase.database.ReactNativeFirebaseDatabasePackage(),
       // expo
       new expo.modules.ExpoModulesPackage(),
       // react-native-maps
-      new com.rnmaps.maps.MapsPackage()
+      new com.rnmaps.maps.MapsPackage(),
+      // react-native-safe-area-context
+      new com.th3rdwave.safeareacontext.SafeAreaContextPackage()
     ));
   }
 }
