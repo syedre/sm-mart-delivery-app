@@ -13,7 +13,8 @@
         "NSLocationWhenInUseUsageDescription": "SM mart uses your location while you are delivering an order.",
         "NSLocationAlwaysAndWhenInUseUsageDescription": "SM mart shares your location with the customer while an active delivery is in progress."
       },
-      "googleServicesFile": "./GoogleService-Info.plist"
+      "googleServicesFile": "./GoogleService-Info.plist",
+      "bundleIdentifier": "com.smmart.delivery"
     },
     "android": {
       "package": "com.smmart.delivery",
