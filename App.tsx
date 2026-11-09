@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import "./src/lib/firebase";
+import auth, { FirebaseAuthTypes } from "@react-native-firebase/auth";
 import {
   ActivityIndicator,
   Alert,
@@ -16,7 +16,7 @@ import MapView, { Marker } from "react-native-maps";
 import * as Location from "expo-location";
 import { SAMPLE_ORDERS, DeliveryOrder } from "./src/data/orders";
 
-type Screen = "login" | "orders" | "details" | "active";
+type Screen = "login" | "verify" | "orders" | "details" | "active";
 
 const COLORS = {
   bg: "#faf8f3",
@@ -33,6 +33,9 @@ export default function App() {
   const [screen, setScreen] = useState<Screen>("login");
   const [partnerName, setPartnerName] = useState("Delivery Partner");
   const [phone, setPhone] = useState("");
+  const [verificationCode, setVerificationCode] = useState("");
+  const [confirmation, setConfirmation] = useState<FirebaseAuthTypes.ConfirmationResult | null>(null);
+  const [authInitializing, setAuthInitializing] = useState(true);
   const [selectedOrder, setSelectedOrder] = useState<DeliveryOrder | null>(null);
   const [activeOrderId, setActiveOrderId] = useState<string | null>(null);
   const [locationText, setLocationText] = useState("Location not started");
@@ -40,6 +43,19 @@ export default function App() {
   const [completedIds, setCompletedIds] = useState<string[]>([]);
 
   const activeOrder = SAMPLE_ORDERS.find((order) => order.id === activeOrderId);
+
+  useEffect(() => {
+    const unsubscribe = auth().onAuthStateChanged((user) => {
+      if (user) {
+        setPartnerName(user.phoneNumber || "SM mart Delivery Partner");
+        setScreen("orders");
+      } else {
+        setScreen("login");
+      }
+      setAuthInitializing(false);
+    });
+    return unsubscribe;
+  }, []);
 
   useEffect(() => {
     if (screen !== "active" || !activeOrderId) return;
@@ -75,13 +91,68 @@ export default function App() {
     };
   }, [screen, activeOrderId]);
 
-  const signIn = () => {
-    if (phone.replace(/\D/g, "").length < 10) {
-      Alert.alert("Enter phone number", "Enter a valid 10-digit demo phone number.");
+  const signIn = async () => {
+    const digits = phone.replace(/\D/g, "");
+    if (digits.length !== 10) {
+      Alert.alert("Check mobile number", "Enter your 10-digit Indian mobile number.");
       return;
     }
-    setPartnerName("SM mart Delivery Partner");
-    setScreen("orders");
+    setBusy(true);
+    try {
+      const result = await auth().signInWithPhoneNumber(`+91${digits}`);
+      setConfirmation(result);
+      setVerificationCode("");
+      setScreen("verify");
+    } catch (error) {
+      const code = (error as { code?: string }).code;
+      const message = code === "auth/invalid-phone-number"
+        ? "Please check the mobile number and try again."
+        : code === "auth/too-many-requests"
+          ? "Too many attempts. Please wait before trying again."
+          : code === "auth/quota-exceeded"
+            ? "Firebase SMS quota has been reached. Use your configured test number or try again tomorrow."
+            : "We could not send the verification code. Check your connection and Firebase app setup.";
+      Alert.alert("Unable to send OTP", message);
+    } finally {
+      setBusy(false);
+    }
+  };
+
+  const verifyCode = async () => {
+    if (!confirmation || verificationCode.trim().length !== 6) {
+      Alert.alert("Enter verification code", "Enter the 6-digit code from Firebase.");
+      return;
+    }
+    setBusy(true);
+    try {
+      await confirmation.confirm(verificationCode.trim());
+      setConfirmation(null);
+    } catch (error) {
+      const code = (error as { code?: string }).code;
+      Alert.alert(
+        "Verification failed",
+        code === "auth/invalid-verification-code"
+          ? "That code is incorrect. Check the code and try again."
+          : "We could not verify this code. Please request a new one."
+      );
+    } finally {
+      setBusy(false);
+    }
+  };
+
+  const cancelVerification = () => {
+    setConfirmation(null);
+    setVerificationCode("");
+    setScreen("login");
+  };
+
+  const handleSignOut = async () => {
+    try {
+      await auth().signOut();
+      setCompletedIds([]);
+    } catch {
+      Alert.alert("Sign out failed", "Please try again.");
+    }
   };
 
   const startDelivery = async (order: DeliveryOrder) => {
@@ -118,6 +189,10 @@ export default function App() {
     </View>
   );
 
+  if (authInitializing) {
+    return <SafeAreaView style={styles.safe}><ActivityIndicator style={{ flex: 1 }} color={COLORS.primary} /></SafeAreaView>;
+  }
+
   if (screen === "login") {
     return (
       <SafeAreaView style={styles.safe}>
@@ -127,21 +202,48 @@ export default function App() {
           <Text style={styles.brand}>SM mart</Text>
           <Text style={styles.subtitle}>Delivery Partner</Text>
           <Text style={styles.loginHeading}>Welcome back</Text>
-          <Text style={styles.body}>Sign in to view your assigned deliveries.</Text>
+          <Text style={styles.body}>Sign in with your registered mobile number to view your deliveries.</Text>
           <Text style={styles.label}>Mobile number</Text>
           <TextInput
             value={phone}
             onChangeText={setPhone}
             keyboardType="phone-pad"
-            placeholder="Enter mobile number"
+            placeholder="10-digit mobile number"
             placeholderTextColor="#9aa49b"
             style={styles.input}
-            maxLength={15}
+            maxLength={10}
           />
-          <TouchableOpacity style={styles.primaryButton} onPress={signIn}>
-            <Text style={styles.primaryButtonText}>Continue in demo mode</Text>
+          <TouchableOpacity style={styles.primaryButton} disabled={busy} onPress={signIn}>
+            {busy ? <ActivityIndicator color="#fff" /> : <Text style={styles.primaryButtonText}>Send verification code</Text>}
           </TouchableOpacity>
-          <Text style={styles.demoNote}>Demo sign-in only · No account is created</Text>
+          <Text style={styles.demoNote}>Secure sign-in powered by Firebase</Text>
+        </View>
+      </SafeAreaView>
+    );
+  }
+
+  if (screen === "verify") {
+    return (
+      <SafeAreaView style={styles.safe}>
+        <StatusBar barStyle="dark-content" />
+        <View style={styles.loginWrap}>
+          <Text style={styles.brand}>Verify your number</Text>
+          <Text style={styles.body}>Enter the 6-digit verification code sent to +91 {phone}.</Text>
+          <Text style={styles.label}>Verification code</Text>
+          <TextInput
+            value={verificationCode}
+            onChangeText={(value) => setVerificationCode(value.replace(/\D/g, "").slice(0, 6))}
+            keyboardType="number-pad"
+            placeholder="6-digit code"
+            placeholderTextColor="#9aa49b"
+            style={styles.input}
+            maxLength={6}
+            autoFocus
+          />
+          <TouchableOpacity style={styles.primaryButton} disabled={busy} onPress={verifyCode}>
+            {busy ? <ActivityIndicator color="#fff" /> : <Text style={styles.primaryButtonText}>Verify and sign in</Text>}
+          </TouchableOpacity>
+          <TouchableOpacity onPress={cancelVerification}><Text style={styles.signOut}>Change mobile number</Text></TouchableOpacity>
         </View>
       </SafeAreaView>
     );
@@ -187,7 +289,7 @@ export default function App() {
           ))}
           {pending.length === 0 && <Text style={styles.empty}>No pending demo deliveries.</Text>}
           <Text style={styles.disclaimer}>Sample orders are shown for development. They are not connected to SM mart's live order system.</Text>
-          <TouchableOpacity onPress={() => setScreen("login")}><Text style={styles.signOut}>Sign out</Text></TouchableOpacity>
+          <TouchableOpacity onPress={handleSignOut}><Text style={styles.signOut}>Sign out</Text></TouchableOpacity>
         </ScrollView>
       </SafeAreaView>
     );
