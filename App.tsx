@@ -223,7 +223,7 @@ function AppContent() {
       setLocationText("Starting GPS and cloud tracking…");
       setScreen("active");
     } catch {
-      Alert.alert("Unable to start delivery", "Please check location permission and try again.");
+      Alert.alert("Unable to start delivery", "Could not start GPS or save the tracking session. Check location permission, Firebase Database rules, and your internet connection, then try again.");
     } finally {
       setBusy(false);
     }
