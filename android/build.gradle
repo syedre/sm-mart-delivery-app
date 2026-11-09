@@ -9,9 +9,9 @@ buildscript {
     classpath 'com.google.gms:google-services:4.4.4'
     classpath('com.android.tools.build:gradle')
     classpath('com.facebook.react:react-native-gradle-plugin')
-    // Keep the compiler aligned with android.kotlinVersion in gradle.properties.
-    // Expo SDK 57's unversioned classpath otherwise resolves RN's Kotlin 2.1.20.
-    classpath('org.jetbrains.kotlin:kotlin-gradle-plugin:2.4.0')
+    // Expo SDK 57's Pika compiler plugin is published for Kotlin 2.3.20.
+    // Pin KGP explicitly so it matches the Expo build-properties setting.
+    classpath('org.jetbrains.kotlin:kotlin-gradle-plugin:2.3.20')
   }
 }
 
