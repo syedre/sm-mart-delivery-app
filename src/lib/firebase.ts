@@ -1,5 +1,7 @@
-import { FirebaseApp, getApp, getApps, initializeApp } from "firebase/app";
-import { Database, getDatabase } from "firebase/database";
+import { getApp, getApps, initializeApp } from "firebase/app";
+import type { FirebaseApp } from "firebase/app";
+import { getDatabase } from "firebase/database";
+import type { Database } from "firebase/database";
 
 const firebaseConfig = {
   apiKey: process.env.EXPO_PUBLIC_FIREBASE_API_KEY,
