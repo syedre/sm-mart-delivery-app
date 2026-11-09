@@ -5,7 +5,6 @@ import {
   onAuthStateChanged,
   signInWithPhoneNumber,
   signOut,
-  type FirebaseAuthTypes,
 } from "@react-native-firebase/auth";
 import {
   ActivityIndicator,
@@ -24,6 +23,7 @@ import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
 import { SAMPLE_ORDERS, type DeliveryOrder } from "./src/data/orders";
 
 type Screen = "login" | "verify" | "orders" | "details" | "active";
+type PhoneConfirmation = Awaited<ReturnType<typeof signInWithPhoneNumber>>;
 
 const COLORS = {
   bg: "#faf8f3",
@@ -41,7 +41,7 @@ function AppContent() {
   const [partnerName, setPartnerName] = useState("Delivery Partner");
   const [phone, setPhone] = useState("");
   const [verificationCode, setVerificationCode] = useState("");
-  const [confirmation, setConfirmation] = useState<FirebaseAuthTypes.ConfirmationResult | null>(null);
+  const [confirmation, setConfirmation] = useState<PhoneConfirmation | null>(null);
   const [authInitializing, setAuthInitializing] = useState(true);
   const [authError, setAuthError] = useState<string | null>(null);
   const [selectedOrder, setSelectedOrder] = useState<DeliveryOrder | null>(null);
