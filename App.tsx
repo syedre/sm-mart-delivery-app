@@ -2,7 +2,9 @@ import { useEffect, useState } from "react";
 import {
   getAuth,
   onAuthStateChanged,
-  signInWithPhoneNumber,
+  sendEmailVerification,
+  sendPasswordResetEmail,
+  signInWithEmailAndPassword,
   signOut,
 } from "@react-native-firebase/auth";
 import {
@@ -21,8 +23,7 @@ import * as Location from "expo-location";
 import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
 import { SAMPLE_ORDERS, type DeliveryOrder } from "./src/data/orders";
 
-type Screen = "login" | "verify" | "orders" | "details" | "active";
-type PhoneConfirmation = Awaited<ReturnType<typeof signInWithPhoneNumber>>;
+type Screen = "login" | "orders" | "details" | "active";
 
 const COLORS = {
   bg: "#faf8f3",
@@ -38,9 +39,8 @@ const COLORS = {
 function AppContent() {
   const [screen, setScreen] = useState<Screen>("login");
   const [partnerName, setPartnerName] = useState("Delivery Partner");
-  const [phone, setPhone] = useState("");
-  const [verificationCode, setVerificationCode] = useState("");
-  const [confirmation, setConfirmation] = useState<PhoneConfirmation | null>(null);
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const [authInitializing, setAuthInitializing] = useState(true);
   const [authError, setAuthError] = useState<string | null>(null);
   const [selectedOrder, setSelectedOrder] = useState<DeliveryOrder | null>(null);
@@ -59,13 +59,16 @@ function AppContent() {
       const authInstance = getAuth();
       unsubscribe = onAuthStateChanged(authInstance, (user) => {
         if (!mounted) return;
-        if (user) {
-          setPartnerName(user.phoneNumber || "SM mart Delivery Partner");
+        if (user?.emailVerified) {
+          setPartnerName(user.displayName || user.email?.split("@")[0] || "SM mart Delivery Partner");
           setScreen("orders");
+          setAuthError(null);
         } else {
           setScreen("login");
+          if (user) {
+            setAuthError("Please verify your email address before accessing deliveries.");
+          }
         }
-        setAuthError(null);
         setAuthInitializing(false);
       });
     } catch (error) {
@@ -115,58 +118,67 @@ function AppContent() {
   }, [screen, activeOrderId]);
 
   const signIn = async () => {
-    const digits = phone.replace(/\D/g, "");
-    if (digits.length !== 10) {
-      Alert.alert("Check mobile number", "Enter your 10-digit Indian mobile number.");
+    const normalizedEmail = email.trim().toLowerCase();
+    if (!/^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$/.test(normalizedEmail)) {
+      Alert.alert("Check email address", "Enter a valid registered email address.");
       return;
     }
+    if (!password) {
+      Alert.alert("Enter password", "Enter the password provided by your administrator.");
+      return;
+    }
+
     setBusy(true);
+    setAuthError(null);
     try {
-      const result = await signInWithPhoneNumber(getAuth(), `+91${digits}`);
-      setConfirmation(result);
-      setVerificationCode("");
-      setScreen("verify");
+      const credential = await signInWithEmailAndPassword(getAuth(), normalizedEmail, password);
+      if (!credential.user.emailVerified) {
+        await sendEmailVerification(credential.user);
+        await signOut(getAuth());
+        setAuthError("A verification link has been sent to your email. Verify your address, then sign in again.");
+        return;
+      }
+      setPartnerName(credential.user.displayName || normalizedEmail.split("@")[0] || "SM mart Delivery Partner");
+      setScreen("orders");
     } catch (error) {
       const code = (error as { code?: string }).code;
-      const message = code === "auth/invalid-phone-number"
-        ? "Please check the mobile number and try again."
-        : code === "auth/too-many-requests"
-          ? "Too many attempts. Please wait before trying again."
-          : code === "auth/quota-exceeded"
-            ? "Firebase SMS quota has been reached. Use your configured test number or try again tomorrow."
-            : "We could not send the verification code. Check your connection and Firebase app setup.";
-      Alert.alert("Unable to send OTP", message);
+      const message =
+        code === "auth/invalid-email"
+          ? "Enter a valid email address."
+          : code === "auth/invalid-credential" || code === "auth/user-not-found" || code === "auth/wrong-password"
+            ? "Email or password is incorrect."
+            : code === "auth/user-disabled"
+              ? "This delivery partner account has been disabled. Contact your administrator."
+              : code === "auth/too-many-requests"
+                ? "Too many attempts. Please wait and try again."
+                : "We could not sign you in. Please check your connection and try again.";
+      setAuthError(message);
     } finally {
       setBusy(false);
     }
   };
 
-  const verifyCode = async () => {
-    if (!confirmation || verificationCode.trim().length !== 6) {
-      Alert.alert("Enter verification code", "Enter the 6-digit code from Firebase.");
+  const resetPassword = async () => {
+    const normalizedEmail = email.trim().toLowerCase();
+    if (!/^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$/.test(normalizedEmail)) {
+      Alert.alert("Enter your email", "Enter your registered email address first.");
       return;
     }
     setBusy(true);
     try {
-      await confirmation.confirm(verificationCode.trim());
-      setConfirmation(null);
+      await sendPasswordResetEmail(getAuth(), normalizedEmail);
+      Alert.alert("Check your email", "If an account exists for this address, Firebase will send a password reset link.");
     } catch (error) {
       const code = (error as { code?: string }).code;
       Alert.alert(
-        "Verification failed",
-        code === "auth/invalid-verification-code"
-          ? "That code is incorrect. Check the code and try again."
-          : "We could not verify this code. Please request a new one."
+        "Unable to send reset link",
+        code === "auth/invalid-email"
+          ? "Enter a valid email address."
+          : "Please try again later or contact your administrator."
       );
     } finally {
       setBusy(false);
     }
-  };
-
-  const cancelVerification = () => {
-    setConfirmation(null);
-    setVerificationCode("");
-    setScreen("login");
   };
 
   const handleSignOut = async () => {
@@ -228,49 +240,42 @@ function AppContent() {
           <Text style={styles.brand}>SM mart</Text>
           <Text style={styles.subtitle}>Delivery Partner</Text>
           <Text style={styles.loginHeading}>Welcome back</Text>
-          <Text style={styles.body}>Sign in with your registered mobile number to view your deliveries.</Text>
-          <Text style={styles.label}>Mobile number</Text>
+          <Text style={styles.body}>Sign in with the email and password provided by your SM mart administrator.</Text>
+          <Text style={styles.label}>Email address</Text>
           <TextInput
-            value={phone}
-            onChangeText={setPhone}
-            keyboardType="phone-pad"
-            placeholder="10-digit mobile number"
+            value={email}
+            onChangeText={setEmail}
+            keyboardType="email-address"
+            autoCapitalize="none"
+            autoCorrect={false}
+            autoComplete="email"
+            textContentType="emailAddress"
+            placeholder="you@example.com"
             placeholderTextColor="#9aa49b"
             style={styles.input}
-            maxLength={10}
+          />
+          <Text style={[styles.label, { marginTop: 18 }]}>Password</Text>
+          <TextInput
+            value={password}
+            onChangeText={setPassword}
+            secureTextEntry
+            autoCapitalize="none"
+            autoComplete="password"
+            textContentType="password"
+            placeholder="Enter your password"
+            placeholderTextColor="#9aa49b"
+            style={styles.input}
+            onSubmitEditing={signIn}
+            returnKeyType="go"
           />
           <TouchableOpacity style={styles.primaryButton} disabled={busy} onPress={signIn}>
-            {busy ? <ActivityIndicator color="#fff" /> : <Text style={styles.primaryButtonText}>Send verification code</Text>}
+            {busy ? <ActivityIndicator color="#fff" /> : <Text style={styles.primaryButtonText}>Sign in</Text>}
           </TouchableOpacity>
-          <Text style={styles.demoNote}>Secure sign-in powered by Firebase</Text>
-          {authError ? <Text style={styles.authError}>Firebase sign-in is unavailable: {authError}</Text> : null}
-        </View>
-      </SafeAreaView>
-    );
-  }
-
-  if (screen === "verify") {
-    return (
-      <SafeAreaView style={styles.safe}>
-        <StatusBar barStyle="dark-content" />
-        <View style={styles.loginWrap}>
-          <Text style={styles.brand}>Verify your number</Text>
-          <Text style={styles.body}>Enter the 6-digit verification code sent to +91 {phone}.</Text>
-          <Text style={styles.label}>Verification code</Text>
-          <TextInput
-            value={verificationCode}
-            onChangeText={(value) => setVerificationCode(value.replace(/\D/g, "").slice(0, 6))}
-            keyboardType="number-pad"
-            placeholder="6-digit code"
-            placeholderTextColor="#9aa49b"
-            style={styles.input}
-            maxLength={6}
-            autoFocus
-          />
-          <TouchableOpacity style={styles.primaryButton} disabled={busy} onPress={verifyCode}>
-            {busy ? <ActivityIndicator color="#fff" /> : <Text style={styles.primaryButtonText}>Verify and sign in</Text>}
+          <TouchableOpacity disabled={busy} onPress={resetPassword}>
+            <Text style={styles.signOut}>Forgot password?</Text>
           </TouchableOpacity>
-          <TouchableOpacity onPress={cancelVerification}><Text style={styles.signOut}>Change mobile number</Text></TouchableOpacity>
+          <Text style={styles.demoNote}>Secure email sign-in powered by Firebase</Text>
+          {authError ? <Text style={styles.authError}>{authError}</Text> : null}
         </View>
       </SafeAreaView>
     );
