@@ -2,20 +2,42 @@
 
 A separate Expo React Native app for SM mart delivery partners.
 
-## Current scope
+## Isolation and safety
 
-- Standalone delivery-partner app; existing customer app and production backend remain untouched.
-- Initial MVP uses local sample orders so the app can be developed and tested independently.
-- No Supabase credentials, migrations, Edge Functions, webhooks, or Render service changes are included.
+- This repository is independent of the SM mart customer app.
+- It does not connect to the production Supabase project or production order APIs.
+- It does not change Supabase schemas, migrations, Edge Functions, webhooks, or the Render catalog socket.
+- Sample orders remain local demo data until a separately approved integration is designed.
 
-## Planned MVP
+## Firebase setup
 
-1. Delivery partner sign-in screen (demo mode initially).
-2. Assigned orders list with sample data.
-3. Order details and customer delivery address.
-4. Start delivery and foreground/background location tracking foundation.
-5. Delivery completion flow.
+The app uses the Firebase JavaScript SDK and the separate Firebase project created for SM mart Delivery.
 
-## Development
+1. Copy `.env.example` to `.env`.
+2. Fill in the `EXPO_PUBLIC_FIREBASE_*` values from Firebase Console → Project settings → General → Your apps → SM mart Delivery.
+3. Keep the Realtime Database in locked mode. Configure Firebase Authentication and restrictive Realtime Database Security Rules before enabling client reads or writes.
+4. Restart Expo after changing `.env`:
 
-The project scaffold is being added in stages. Firebase configuration and real order integration are intentionally not enabled until separate credentials and an approved integration contract are provided.
+   ```bash
+   npx expo start --clear
+   ```
+
+Firebase client configuration is not a substitute for database security rules. Never make the database publicly readable or writable.
+
+## Current functionality
+
+- Demo phone-number sign-in (no real authentication or OTP).
+- Local sample assigned orders.
+- Order details and COD summary.
+- Foreground GPS display on the delivery partner's device.
+- Local demo completion flow.
+
+## Not yet enabled
+
+- Firebase Authentication / real delivery partner accounts.
+- Publishing GPS coordinates to Realtime Database.
+- Customer-side live location display.
+- Background GPS tracking.
+- Live assigned-order synchronization with the production order system.
+
+The Firebase app and Realtime Database initialization module is present, but GPS publishing is intentionally not enabled until authentication and database security rules are configured and tested.
