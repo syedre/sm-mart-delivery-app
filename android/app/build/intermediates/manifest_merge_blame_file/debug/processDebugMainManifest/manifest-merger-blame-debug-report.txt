@@ -1,0 +1,580 @@
+1<?xml version="1.0" encoding="utf-8"?>
+2<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+3    package="com.smmart.delivery"
+4    android:versionCode="1"
+5    android:versionName="1.0.0" >
+6
+7    <uses-sdk
+8        android:minSdkVersion="24"
+9        android:targetSdkVersion="36" />
+10
+11    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
+11-->/Users/rehan/Desktop/project/sm-mart-delivery-app/android/app/src/main/AndroidManifest.xml:9:3-75
+11-->/Users/rehan/Desktop/project/sm-mart-delivery-app/android/app/src/main/AndroidManifest.xml:9:20-73
+12    <uses-permission android:name="android.permission.ACCESS_BACKGROUND_LOCATION" />
+12-->/Users/rehan/Desktop/project/sm-mart-delivery-app/android/app/src/main/AndroidManifest.xml:2:3-82
+12-->/Users/rehan/Desktop/project/sm-mart-delivery-app/android/app/src/main/AndroidManifest.xml:2:20-80
+13    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+13-->/Users/rehan/Desktop/project/sm-mart-delivery-app/android/app/src/main/AndroidManifest.xml:3:3-78
+13-->/Users/rehan/Desktop/project/sm-mart-delivery-app/android/app/src/main/AndroidManifest.xml:3:20-76
+14    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+14-->/Users/rehan/Desktop/project/sm-mart-delivery-app/android/app/src/main/AndroidManifest.xml:4:3-76
+14-->/Users/rehan/Desktop/project/sm-mart-delivery-app/android/app/src/main/AndroidManifest.xml:4:20-74
+15    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+15-->/Users/rehan/Desktop/project/sm-mart-delivery-app/android/app/src/main/AndroidManifest.xml:5:3-74
+15-->/Users/rehan/Desktop/project/sm-mart-delivery-app/android/app/src/main/AndroidManifest.xml:5:20-72
+16    <uses-permission android:name="android.permission.FOREGROUND_SERVICE_LOCATION" />
+16-->/Users/rehan/Desktop/project/sm-mart-delivery-app/android/app/src/main/AndroidManifest.xml:6:3-83
+16-->/Users/rehan/Desktop/project/sm-mart-delivery-app/android/app/src/main/AndroidManifest.xml:6:20-81
+17    <uses-permission android:name="android.permission.INTERNET" />
+17-->/Users/rehan/Desktop/project/sm-mart-delivery-app/android/app/src/main/AndroidManifest.xml:7:3-64
+17-->/Users/rehan/Desktop/project/sm-mart-delivery-app/android/app/src/main/AndroidManifest.xml:7:20-62
+18    <uses-permission
+18-->/Users/rehan/Desktop/project/sm-mart-delivery-app/android/app/src/main/AndroidManifest.xml:8:3-142
+19        android:name="android.permission.READ_EXTERNAL_STORAGE"
+19-->/Users/rehan/Desktop/project/sm-mart-delivery-app/android/app/src/main/AndroidManifest.xml:8:20-75
+20        android:maxSdkVersion="32" />
+20-->/Users/rehan/Desktop/project/sm-mart-delivery-app/android/app/src/main/AndroidManifest.xml:8:76-102
+21    <uses-permission android:name="android.permission.VIBRATE" />
+21-->/Users/rehan/Desktop/project/sm-mart-delivery-app/android/app/src/main/AndroidManifest.xml:10:3-63
+21-->/Users/rehan/Desktop/project/sm-mart-delivery-app/android/app/src/main/AndroidManifest.xml:10:20-61
+22    <uses-permission
+22-->/Users/rehan/Desktop/project/sm-mart-delivery-app/android/app/src/main/AndroidManifest.xml:11:3-143
+23        android:name="android.permission.WRITE_EXTERNAL_STORAGE"
+23-->/Users/rehan/Desktop/project/sm-mart-delivery-app/android/app/src/main/AndroidManifest.xml:11:20-76
+24        android:maxSdkVersion="32" />
+24-->/Users/rehan/Desktop/project/sm-mart-delivery-app/android/app/src/main/AndroidManifest.xml:11:77-103
+25
+26    <queries>
+26-->/Users/rehan/Desktop/project/sm-mart-delivery-app/android/app/src/main/AndroidManifest.xml:12:3-18:13
+27        <intent>
+27-->/Users/rehan/Desktop/project/sm-mart-delivery-app/android/app/src/main/AndroidManifest.xml:13:5-17:14
+28            <action android:name="android.intent.action.VIEW" />
+28-->/Users/rehan/Desktop/project/sm-mart-delivery-app/android/app/src/main/AndroidManifest.xml:14:7-58
+28-->/Users/rehan/Desktop/project/sm-mart-delivery-app/android/app/src/main/AndroidManifest.xml:14:15-56
+29
+30            <category android:name="android.intent.category.BROWSABLE" />
+30-->/Users/rehan/Desktop/project/sm-mart-delivery-app/android/app/src/main/AndroidManifest.xml:15:7-67
+30-->/Users/rehan/Desktop/project/sm-mart-delivery-app/android/app/src/main/AndroidManifest.xml:15:17-65
+31
+32            <data android:scheme="https" />
+32-->/Users/rehan/Desktop/project/sm-mart-delivery-app/android/app/src/main/AndroidManifest.xml:16:7-37
+32-->/Users/rehan/Desktop/project/sm-mart-delivery-app/android/app/src/main/AndroidManifest.xml:16:13-35
+33        </intent>
+34        <!-- Query open documents -->
+35        <intent>
+35-->[host.exp.exponent:expo.modules.filesystem:57.0.7] /Users/rehan/.gradle/caches/9.3.1/transforms/b00741ba960b4ccfef7a6fddb4195d79/transformed/expo.modules.filesystem-57.0.7/AndroidManifest.xml:19:9-21:18
+36            <action android:name="android.intent.action.OPEN_DOCUMENT_TREE" />
+36-->[host.exp.exponent:expo.modules.filesystem:57.0.7] /Users/rehan/.gradle/caches/9.3.1/transforms/b00741ba960b4ccfef7a6fddb4195d79/transformed/expo.modules.filesystem-57.0.7/AndroidManifest.xml:20:13-79
+36-->[host.exp.exponent:expo.modules.filesystem:57.0.7] /Users/rehan/.gradle/caches/9.3.1/transforms/b00741ba960b4ccfef7a6fddb4195d79/transformed/expo.modules.filesystem-57.0.7/AndroidManifest.xml:20:21-76
+37        </intent> <!-- Needs to be explicitly declared on Android R+ -->
+38        <package android:name="com.google.android.apps.maps" />
+38-->[com.google.android.gms:play-services-maps:19.1.0] /Users/rehan/.gradle/caches/9.3.1/transforms/caeb8ee886f970ee2362821ac662fbe6/transformed/play-services-maps-19.1.0/AndroidManifest.xml:29:7-61
+38-->[com.google.android.gms:play-services-maps:19.1.0] /Users/rehan/.gradle/caches/9.3.1/transforms/caeb8ee886f970ee2362821ac662fbe6/transformed/play-services-maps-19.1.0/AndroidManifest.xml:29:16-59
+39    </queries>
+40
+41    <uses-permission android:name="android.permission.WAKE_LOCK" />
+41-->[androidx.work:work-runtime:2.9.1] /Users/rehan/.gradle/caches/9.3.1/transforms/1e29e10af4eaaf3e9b3752bef6c9b872/transformed/work-runtime-2.9.1/AndroidManifest.xml:23:5-68
+41-->[androidx.work:work-runtime:2.9.1] /Users/rehan/.gradle/caches/9.3.1/transforms/1e29e10af4eaaf3e9b3752bef6c9b872/transformed/work-runtime-2.9.1/AndroidManifest.xml:23:22-65
+42    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+42-->[androidx.work:work-runtime:2.9.1] /Users/rehan/.gradle/caches/9.3.1/transforms/1e29e10af4eaaf3e9b3752bef6c9b872/transformed/work-runtime-2.9.1/AndroidManifest.xml:24:5-79
+42-->[androidx.work:work-runtime:2.9.1] /Users/rehan/.gradle/caches/9.3.1/transforms/1e29e10af4eaaf3e9b3752bef6c9b872/transformed/work-runtime-2.9.1/AndroidManifest.xml:24:22-76
+43    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+43-->[androidx.work:work-runtime:2.9.1] /Users/rehan/.gradle/caches/9.3.1/transforms/1e29e10af4eaaf3e9b3752bef6c9b872/transformed/work-runtime-2.9.1/AndroidManifest.xml:25:5-81
+43-->[androidx.work:work-runtime:2.9.1] /Users/rehan/.gradle/caches/9.3.1/transforms/1e29e10af4eaaf3e9b3752bef6c9b872/transformed/work-runtime-2.9.1/AndroidManifest.xml:25:22-78
+44
+45    <uses-feature
+45-->[com.google.android.gms:play-services-maps:19.1.0] /Users/rehan/.gradle/caches/9.3.1/transforms/caeb8ee886f970ee2362821ac662fbe6/transformed/play-services-maps-19.1.0/AndroidManifest.xml:22:5-24:33
+46        android:glEsVersion="0x00020000"
+46-->[com.google.android.gms:play-services-maps:19.1.0] /Users/rehan/.gradle/caches/9.3.1/transforms/caeb8ee886f970ee2362821ac662fbe6/transformed/play-services-maps-19.1.0/AndroidManifest.xml:23:8-40
+47        android:required="true" />
+47-->[com.google.android.gms:play-services-maps:19.1.0] /Users/rehan/.gradle/caches/9.3.1/transforms/caeb8ee886f970ee2362821ac662fbe6/transformed/play-services-maps-19.1.0/AndroidManifest.xml:24:8-31
+48
+49    <permission
+49-->[androidx.core:core:1.17.0] /Users/rehan/.gradle/caches/9.3.1/transforms/466655a1ac32b26403843fce0300c0a2/transformed/core-1.17.0/AndroidManifest.xml:22:5-24:47
+50        android:name="com.smmart.delivery.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION"
+50-->[androidx.core:core:1.17.0] /Users/rehan/.gradle/caches/9.3.1/transforms/466655a1ac32b26403843fce0300c0a2/transformed/core-1.17.0/AndroidManifest.xml:23:9-81
+51        android:protectionLevel="signature" />
+51-->[androidx.core:core:1.17.0] /Users/rehan/.gradle/caches/9.3.1/transforms/466655a1ac32b26403843fce0300c0a2/transformed/core-1.17.0/AndroidManifest.xml:24:9-44
+52
+53    <uses-permission android:name="com.smmart.delivery.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION" />
+53-->[androidx.core:core:1.17.0] /Users/rehan/.gradle/caches/9.3.1/transforms/466655a1ac32b26403843fce0300c0a2/transformed/core-1.17.0/AndroidManifest.xml:26:5-97
+53-->[androidx.core:core:1.17.0] /Users/rehan/.gradle/caches/9.3.1/transforms/466655a1ac32b26403843fce0300c0a2/transformed/core-1.17.0/AndroidManifest.xml:26:22-94
+54
+55    <application
+55-->/Users/rehan/Desktop/project/sm-mart-delivery-app/android/app/src/main/AndroidManifest.xml:19:3-36:17
+56        android:name="com.smmart.delivery.MainApplication"
+56-->/Users/rehan/Desktop/project/sm-mart-delivery-app/android/app/src/main/AndroidManifest.xml:19:16-47
+57        android:allowBackup="true"
+57-->/Users/rehan/Desktop/project/sm-mart-delivery-app/android/app/src/main/AndroidManifest.xml:19:162-188
+58        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
+58-->[androidx.core:core:1.17.0] /Users/rehan/.gradle/caches/9.3.1/transforms/466655a1ac32b26403843fce0300c0a2/transformed/core-1.17.0/AndroidManifest.xml:28:18-86
+59        android:debuggable="true"
+60        android:enableOnBackInvokedCallback="false"
+60-->/Users/rehan/Desktop/project/sm-mart-delivery-app/android/app/src/main/AndroidManifest.xml:19:248-291
+61        android:extractNativeLibs="false"
+62        android:icon="@mipmap/ic_launcher"
+62-->/Users/rehan/Desktop/project/sm-mart-delivery-app/android/app/src/main/AndroidManifest.xml:19:81-115
+63        android:label="@string/app_name"
+63-->/Users/rehan/Desktop/project/sm-mart-delivery-app/android/app/src/main/AndroidManifest.xml:19:48-80
+64        android:roundIcon="@mipmap/ic_launcher_round"
+64-->/Users/rehan/Desktop/project/sm-mart-delivery-app/android/app/src/main/AndroidManifest.xml:19:116-161
+65        android:supportsRtl="true"
+65-->/Users/rehan/Desktop/project/sm-mart-delivery-app/android/app/src/main/AndroidManifest.xml:19:221-247
+66        android:theme="@style/AppTheme"
+66-->/Users/rehan/Desktop/project/sm-mart-delivery-app/android/app/src/main/AndroidManifest.xml:19:189-220
+67        android:usesCleartextTraffic="true" >
+67-->/Users/rehan/Desktop/project/sm-mart-delivery-app/android/app/src/debug/AndroidManifest.xml:6:18-53
+68        <meta-data
+68-->/Users/rehan/Desktop/project/sm-mart-delivery-app/android/app/src/main/AndroidManifest.xml:20:5-83
+69            android:name="expo.modules.updates.ENABLED"
+69-->/Users/rehan/Desktop/project/sm-mart-delivery-app/android/app/src/main/AndroidManifest.xml:20:16-59
+70            android:value="false" />
+70-->/Users/rehan/Desktop/project/sm-mart-delivery-app/android/app/src/main/AndroidManifest.xml:20:60-81
+71        <meta-data
+71-->/Users/rehan/Desktop/project/sm-mart-delivery-app/android/app/src/main/AndroidManifest.xml:21:5-102
+72            android:name="expo.modules.updates.ENABLE_BSDIFF_PATCH_SUPPORT"
+72-->/Users/rehan/Desktop/project/sm-mart-delivery-app/android/app/src/main/AndroidManifest.xml:21:16-79
+73            android:value="true" />
+73-->/Users/rehan/Desktop/project/sm-mart-delivery-app/android/app/src/main/AndroidManifest.xml:21:80-100
+74        <meta-data
+74-->/Users/rehan/Desktop/project/sm-mart-delivery-app/android/app/src/main/AndroidManifest.xml:22:5-105
+75            android:name="expo.modules.updates.EXPO_UPDATES_CHECK_ON_LAUNCH"
+75-->/Users/rehan/Desktop/project/sm-mart-delivery-app/android/app/src/main/AndroidManifest.xml:22:16-80
+76            android:value="ALWAYS" />
+76-->/Users/rehan/Desktop/project/sm-mart-delivery-app/android/app/src/main/AndroidManifest.xml:22:81-103
+77        <meta-data
+77-->/Users/rehan/Desktop/project/sm-mart-delivery-app/android/app/src/main/AndroidManifest.xml:23:5-99
+78            android:name="expo.modules.updates.EXPO_UPDATES_LAUNCH_WAIT_MS"
+78-->/Users/rehan/Desktop/project/sm-mart-delivery-app/android/app/src/main/AndroidManifest.xml:23:16-79
+79            android:value="0" />
+79-->/Users/rehan/Desktop/project/sm-mart-delivery-app/android/app/src/main/AndroidManifest.xml:23:80-97
+80
+81        <activity
+81-->/Users/rehan/Desktop/project/sm-mart-delivery-app/android/app/src/main/AndroidManifest.xml:24:5-35:16
+82            android:name="com.smmart.delivery.MainActivity"
+82-->/Users/rehan/Desktop/project/sm-mart-delivery-app/android/app/src/main/AndroidManifest.xml:24:15-43
+83            android:configChanges="keyboard|keyboardHidden|orientation|screenSize|screenLayout|uiMode|smallestScreenSize|assetsPaths"
+83-->/Users/rehan/Desktop/project/sm-mart-delivery-app/android/app/src/main/AndroidManifest.xml:24:44-165
+84            android:exported="true"
+84-->/Users/rehan/Desktop/project/sm-mart-delivery-app/android/app/src/main/AndroidManifest.xml:24:287-310
+85            android:launchMode="singleTask"
+85-->/Users/rehan/Desktop/project/sm-mart-delivery-app/android/app/src/main/AndroidManifest.xml:24:166-197
+86            android:screenOrientation="portrait"
+86-->/Users/rehan/Desktop/project/sm-mart-delivery-app/android/app/src/main/AndroidManifest.xml:24:311-347
+87            android:theme="@style/Theme.App.SplashScreen"
+87-->/Users/rehan/Desktop/project/sm-mart-delivery-app/android/app/src/main/AndroidManifest.xml:24:241-286
+88            android:windowSoftInputMode="adjustResize" >
+88-->/Users/rehan/Desktop/project/sm-mart-delivery-app/android/app/src/main/AndroidManifest.xml:24:198-240
+89            <intent-filter>
+89-->/Users/rehan/Desktop/project/sm-mart-delivery-app/android/app/src/main/AndroidManifest.xml:25:7-28:23
+90                <action android:name="android.intent.action.MAIN" />
+90-->/Users/rehan/Desktop/project/sm-mart-delivery-app/android/app/src/main/AndroidManifest.xml:26:9-60
+90-->/Users/rehan/Desktop/project/sm-mart-delivery-app/android/app/src/main/AndroidManifest.xml:26:17-58
+91
+92                <category android:name="android.intent.category.LAUNCHER" />
+92-->/Users/rehan/Desktop/project/sm-mart-delivery-app/android/app/src/main/AndroidManifest.xml:27:9-68
+92-->/Users/rehan/Desktop/project/sm-mart-delivery-app/android/app/src/main/AndroidManifest.xml:27:19-66
+93            </intent-filter>
+94            <intent-filter>
+94-->/Users/rehan/Desktop/project/sm-mart-delivery-app/android/app/src/main/AndroidManifest.xml:29:7-34:23
+95                <action android:name="android.intent.action.VIEW" />
+95-->/Users/rehan/Desktop/project/sm-mart-delivery-app/android/app/src/main/AndroidManifest.xml:14:7-58
+95-->/Users/rehan/Desktop/project/sm-mart-delivery-app/android/app/src/main/AndroidManifest.xml:14:15-56
+96
+97                <category android:name="android.intent.category.DEFAULT" />
+97-->/Users/rehan/Desktop/project/sm-mart-delivery-app/android/app/src/main/AndroidManifest.xml:31:9-67
+97-->/Users/rehan/Desktop/project/sm-mart-delivery-app/android/app/src/main/AndroidManifest.xml:31:19-65
+98                <category android:name="android.intent.category.BROWSABLE" />
+98-->/Users/rehan/Desktop/project/sm-mart-delivery-app/android/app/src/main/AndroidManifest.xml:15:7-67
+98-->/Users/rehan/Desktop/project/sm-mart-delivery-app/android/app/src/main/AndroidManifest.xml:15:17-65
+99
+100                <data android:scheme="smmartdelivery" />
+100-->/Users/rehan/Desktop/project/sm-mart-delivery-app/android/app/src/main/AndroidManifest.xml:16:7-37
+100-->/Users/rehan/Desktop/project/sm-mart-delivery-app/android/app/src/main/AndroidManifest.xml:16:13-35
+101            </intent-filter>
+102        </activity>
+103
+104        <meta-data
+104-->[:expo-modules-core] /Users/rehan/Desktop/project/sm-mart-delivery-app/node_modules/expo-modules-core/android/build/intermediates/merged_manifest/debug/processDebugManifest/AndroidManifest.xml:9:9-11:89
+105            android:name="org.unimodules.core.AppLoader#react-native-headless"
+105-->[:expo-modules-core] /Users/rehan/Desktop/project/sm-mart-delivery-app/node_modules/expo-modules-core/android/build/intermediates/merged_manifest/debug/processDebugManifest/AndroidManifest.xml:10:13-79
+106            android:value="expo.modules.adapters.react.apploader.RNHeadlessAppLoader" />
+106-->[:expo-modules-core] /Users/rehan/Desktop/project/sm-mart-delivery-app/node_modules/expo-modules-core/android/build/intermediates/merged_manifest/debug/processDebugManifest/AndroidManifest.xml:11:13-86
+107        <meta-data
+107-->[:expo-modules-core] /Users/rehan/Desktop/project/sm-mart-delivery-app/node_modules/expo-modules-core/android/build/intermediates/merged_manifest/debug/processDebugManifest/AndroidManifest.xml:12:9-15:45
+108            android:name="com.facebook.soloader.enabled"
+108-->[:expo-modules-core] /Users/rehan/Desktop/project/sm-mart-delivery-app/node_modules/expo-modules-core/android/build/intermediates/merged_manifest/debug/processDebugManifest/AndroidManifest.xml:13:13-57
+109            android:value="true" />
+109-->[:expo-modules-core] /Users/rehan/Desktop/project/sm-mart-delivery-app/node_modules/expo-modules-core/android/build/intermediates/merged_manifest/debug/processDebugManifest/AndroidManifest.xml:14:13-33
+110
+111        <provider
+111-->[host.exp.exponent:expo.modules.filesystem:57.0.7] /Users/rehan/.gradle/caches/9.3.1/transforms/b00741ba960b4ccfef7a6fddb4195d79/transformed/expo.modules.filesystem-57.0.7/AndroidManifest.xml:25:9-34:20
+112            android:name="expo.modules.filesystem.FileSystemFileProvider"
+112-->[host.exp.exponent:expo.modules.filesystem:57.0.7] /Users/rehan/.gradle/caches/9.3.1/transforms/b00741ba960b4ccfef7a6fddb4195d79/transformed/expo.modules.filesystem-57.0.7/AndroidManifest.xml:26:13-74
+113            android:authorities="com.smmart.delivery.FileSystemFileProvider"
+113-->[host.exp.exponent:expo.modules.filesystem:57.0.7] /Users/rehan/.gradle/caches/9.3.1/transforms/b00741ba960b4ccfef7a6fddb4195d79/transformed/expo.modules.filesystem-57.0.7/AndroidManifest.xml:27:13-74
+114            android:exported="false"
+114-->[host.exp.exponent:expo.modules.filesystem:57.0.7] /Users/rehan/.gradle/caches/9.3.1/transforms/b00741ba960b4ccfef7a6fddb4195d79/transformed/expo.modules.filesystem-57.0.7/AndroidManifest.xml:28:13-37
+115            android:grantUriPermissions="true" >
+115-->[host.exp.exponent:expo.modules.filesystem:57.0.7] /Users/rehan/.gradle/caches/9.3.1/transforms/b00741ba960b4ccfef7a6fddb4195d79/transformed/expo.modules.filesystem-57.0.7/AndroidManifest.xml:29:13-47
+116            <meta-data
+116-->[host.exp.exponent:expo.modules.filesystem:57.0.7] /Users/rehan/.gradle/caches/9.3.1/transforms/b00741ba960b4ccfef7a6fddb4195d79/transformed/expo.modules.filesystem-57.0.7/AndroidManifest.xml:31:13-33:70
+117                android:name="android.support.FILE_PROVIDER_PATHS"
+117-->[host.exp.exponent:expo.modules.filesystem:57.0.7] /Users/rehan/.gradle/caches/9.3.1/transforms/b00741ba960b4ccfef7a6fddb4195d79/transformed/expo.modules.filesystem-57.0.7/AndroidManifest.xml:32:17-67
+118                android:resource="@xml/file_system_provider_paths" />
+118-->[host.exp.exponent:expo.modules.filesystem:57.0.7] /Users/rehan/.gradle/caches/9.3.1/transforms/b00741ba960b4ccfef7a6fddb4195d79/transformed/expo.modules.filesystem-57.0.7/AndroidManifest.xml:33:17-67
+119        </provider>
+120
+121        <activity
+121-->[com.facebook.react:react-android:0.86.3] /Users/rehan/.gradle/caches/9.3.1/transforms/63665759bc44fa5b83dd6b6c18b77145/transformed/react-android-0.86.3-debug/AndroidManifest.xml:19:9-21:40
+122            android:name="com.facebook.react.devsupport.DevSettingsActivity"
+122-->[com.facebook.react:react-android:0.86.3] /Users/rehan/.gradle/caches/9.3.1/transforms/63665759bc44fa5b83dd6b6c18b77145/transformed/react-android-0.86.3-debug/AndroidManifest.xml:20:13-77
+123            android:exported="false" />
+123-->[com.facebook.react:react-android:0.86.3] /Users/rehan/.gradle/caches/9.3.1/transforms/63665759bc44fa5b83dd6b6c18b77145/transformed/react-android-0.86.3-debug/AndroidManifest.xml:21:13-37
+124
+125        <service
+125-->[host.exp.exponent:expo.modules.location:57.0.23] /Users/rehan/.gradle/caches/9.3.1/transforms/443a45b17ea6f792bba416c7f02d44f5/transformed/expo.modules.location-57.0.23/AndroidManifest.xml:11:9-14:56
+126            android:name="expo.modules.location.services.LocationTaskService"
+126-->[host.exp.exponent:expo.modules.location:57.0.23] /Users/rehan/.gradle/caches/9.3.1/transforms/443a45b17ea6f792bba416c7f02d44f5/transformed/expo.modules.location-57.0.23/AndroidManifest.xml:12:13-78
+127            android:exported="false"
+127-->[host.exp.exponent:expo.modules.location:57.0.23] /Users/rehan/.gradle/caches/9.3.1/transforms/443a45b17ea6f792bba416c7f02d44f5/transformed/expo.modules.location-57.0.23/AndroidManifest.xml:13:13-37
+128            android:foregroundServiceType="location" />
+128-->[host.exp.exponent:expo.modules.location:57.0.23] /Users/rehan/.gradle/caches/9.3.1/transforms/443a45b17ea6f792bba416c7f02d44f5/transformed/expo.modules.location-57.0.23/AndroidManifest.xml:14:13-53
+129
+130        <receiver
+130-->[host.exp.exponent:expo.modules.taskmanager:57.0.22] /Users/rehan/.gradle/caches/9.3.1/transforms/e07ab6cc71bc7b56cbc41a944ee4f047/transformed/expo.modules.taskmanager-57.0.22/AndroidManifest.xml:8:9-16:20
+131            android:name="expo.modules.taskManager.TaskBroadcastReceiver"
+131-->[host.exp.exponent:expo.modules.taskmanager:57.0.22] /Users/rehan/.gradle/caches/9.3.1/transforms/e07ab6cc71bc7b56cbc41a944ee4f047/transformed/expo.modules.taskmanager-57.0.22/AndroidManifest.xml:9:13-74
+132            android:exported="false" >
+132-->[host.exp.exponent:expo.modules.taskmanager:57.0.22] /Users/rehan/.gradle/caches/9.3.1/transforms/e07ab6cc71bc7b56cbc41a944ee4f047/transformed/expo.modules.taskmanager-57.0.22/AndroidManifest.xml:10:13-37
+133            <intent-filter>
+133-->[host.exp.exponent:expo.modules.taskmanager:57.0.22] /Users/rehan/.gradle/caches/9.3.1/transforms/e07ab6cc71bc7b56cbc41a944ee4f047/transformed/expo.modules.taskmanager-57.0.22/AndroidManifest.xml:11:13-15:29
+134                <action android:name="expo.modules.taskManager.TaskBroadcastReceiver.INTENT_ACTION" />
+134-->[host.exp.exponent:expo.modules.taskmanager:57.0.22] /Users/rehan/.gradle/caches/9.3.1/transforms/e07ab6cc71bc7b56cbc41a944ee4f047/transformed/expo.modules.taskmanager-57.0.22/AndroidManifest.xml:12:17-103
+134-->[host.exp.exponent:expo.modules.taskmanager:57.0.22] /Users/rehan/.gradle/caches/9.3.1/transforms/e07ab6cc71bc7b56cbc41a944ee4f047/transformed/expo.modules.taskmanager-57.0.22/AndroidManifest.xml:12:25-100
+135                <action android:name="android.intent.action.BOOT_COMPLETED" />
+135-->[host.exp.exponent:expo.modules.taskmanager:57.0.22] /Users/rehan/.gradle/caches/9.3.1/transforms/e07ab6cc71bc7b56cbc41a944ee4f047/transformed/expo.modules.taskmanager-57.0.22/AndroidManifest.xml:13:17-79
+135-->[host.exp.exponent:expo.modules.taskmanager:57.0.22] /Users/rehan/.gradle/caches/9.3.1/transforms/e07ab6cc71bc7b56cbc41a944ee4f047/transformed/expo.modules.taskmanager-57.0.22/AndroidManifest.xml:13:25-76
+136                <action android:name="android.intent.action.MY_PACKAGE_REPLACED" />
+136-->[host.exp.exponent:expo.modules.taskmanager:57.0.22] /Users/rehan/.gradle/caches/9.3.1/transforms/e07ab6cc71bc7b56cbc41a944ee4f047/transformed/expo.modules.taskmanager-57.0.22/AndroidManifest.xml:14:17-84
+136-->[host.exp.exponent:expo.modules.taskmanager:57.0.22] /Users/rehan/.gradle/caches/9.3.1/transforms/e07ab6cc71bc7b56cbc41a944ee4f047/transformed/expo.modules.taskmanager-57.0.22/AndroidManifest.xml:14:25-81
+137            </intent-filter>
+138        </receiver>
+139
+140        <service
+140-->[host.exp.exponent:expo.modules.taskmanager:57.0.22] /Users/rehan/.gradle/caches/9.3.1/transforms/e07ab6cc71bc7b56cbc41a944ee4f047/transformed/expo.modules.taskmanager-57.0.22/AndroidManifest.xml:18:9-22:72
+141            android:name="expo.modules.taskManager.TaskJobService"
+141-->[host.exp.exponent:expo.modules.taskmanager:57.0.22] /Users/rehan/.gradle/caches/9.3.1/transforms/e07ab6cc71bc7b56cbc41a944ee4f047/transformed/expo.modules.taskmanager-57.0.22/AndroidManifest.xml:19:13-67
+142            android:enabled="true"
+142-->[host.exp.exponent:expo.modules.taskmanager:57.0.22] /Users/rehan/.gradle/caches/9.3.1/transforms/e07ab6cc71bc7b56cbc41a944ee4f047/transformed/expo.modules.taskmanager-57.0.22/AndroidManifest.xml:20:13-35
+143            android:exported="false"
+143-->[host.exp.exponent:expo.modules.taskmanager:57.0.22] /Users/rehan/.gradle/caches/9.3.1/transforms/e07ab6cc71bc7b56cbc41a944ee4f047/transformed/expo.modules.taskmanager-57.0.22/AndroidManifest.xml:21:13-37
+144            android:permission="android.permission.BIND_JOB_SERVICE" />
+144-->[host.exp.exponent:expo.modules.taskmanager:57.0.22] /Users/rehan/.gradle/caches/9.3.1/transforms/e07ab6cc71bc7b56cbc41a944ee4f047/transformed/expo.modules.taskmanager-57.0.22/AndroidManifest.xml:22:13-69
+145
+146        <meta-data
+146-->[host.exp.exponent:expo.modules.taskmanager:57.0.22] /Users/rehan/.gradle/caches/9.3.1/transforms/e07ab6cc71bc7b56cbc41a944ee4f047/transformed/expo.modules.taskmanager-57.0.22/AndroidManifest.xml:24:9-26:36
+147            android:name="expo.modules.taskManager.oneAppId"
+147-->[host.exp.exponent:expo.modules.taskmanager:57.0.22] /Users/rehan/.gradle/caches/9.3.1/transforms/e07ab6cc71bc7b56cbc41a944ee4f047/transformed/expo.modules.taskmanager-57.0.22/AndroidManifest.xml:25:13-61
+148            android:value="true" />
+148-->[host.exp.exponent:expo.modules.taskmanager:57.0.22] /Users/rehan/.gradle/caches/9.3.1/transforms/e07ab6cc71bc7b56cbc41a944ee4f047/transformed/expo.modules.taskmanager-57.0.22/AndroidManifest.xml:26:13-33
+149
+150        <provider
+150-->[androidx.work:work-runtime:2.9.1] /Users/rehan/.gradle/caches/9.3.1/transforms/1e29e10af4eaaf3e9b3752bef6c9b872/transformed/work-runtime-2.9.1/AndroidManifest.xml:29:9-37:20
+151            android:name="androidx.startup.InitializationProvider"
+151-->[androidx.work:work-runtime:2.9.1] /Users/rehan/.gradle/caches/9.3.1/transforms/1e29e10af4eaaf3e9b3752bef6c9b872/transformed/work-runtime-2.9.1/AndroidManifest.xml:30:13-67
+152            android:authorities="com.smmart.delivery.androidx-startup"
+152-->[androidx.work:work-runtime:2.9.1] /Users/rehan/.gradle/caches/9.3.1/transforms/1e29e10af4eaaf3e9b3752bef6c9b872/transformed/work-runtime-2.9.1/AndroidManifest.xml:31:13-68
+153            android:exported="false" >
+153-->[androidx.work:work-runtime:2.9.1] /Users/rehan/.gradle/caches/9.3.1/transforms/1e29e10af4eaaf3e9b3752bef6c9b872/transformed/work-runtime-2.9.1/AndroidManifest.xml:32:13-37
+154            <meta-data
+154-->[androidx.work:work-runtime:2.9.1] /Users/rehan/.gradle/caches/9.3.1/transforms/1e29e10af4eaaf3e9b3752bef6c9b872/transformed/work-runtime-2.9.1/AndroidManifest.xml:34:13-36:52
+155                android:name="androidx.work.WorkManagerInitializer"
+155-->[androidx.work:work-runtime:2.9.1] /Users/rehan/.gradle/caches/9.3.1/transforms/1e29e10af4eaaf3e9b3752bef6c9b872/transformed/work-runtime-2.9.1/AndroidManifest.xml:35:17-68
+156                android:value="androidx.startup" />
+156-->[androidx.work:work-runtime:2.9.1] /Users/rehan/.gradle/caches/9.3.1/transforms/1e29e10af4eaaf3e9b3752bef6c9b872/transformed/work-runtime-2.9.1/AndroidManifest.xml:36:17-49
+157            <meta-data
+157-->[androidx.emoji2:emoji2:1.3.0] /Users/rehan/.gradle/caches/9.3.1/transforms/11d5952ed796ff4af609c533e02fba63/transformed/emoji2-1.3.0/AndroidManifest.xml:29:13-31:52
+158                android:name="androidx.emoji2.text.EmojiCompatInitializer"
+158-->[androidx.emoji2:emoji2:1.3.0] /Users/rehan/.gradle/caches/9.3.1/transforms/11d5952ed796ff4af609c533e02fba63/transformed/emoji2-1.3.0/AndroidManifest.xml:30:17-75
+159                android:value="androidx.startup" />
+159-->[androidx.emoji2:emoji2:1.3.0] /Users/rehan/.gradle/caches/9.3.1/transforms/11d5952ed796ff4af609c533e02fba63/transformed/emoji2-1.3.0/AndroidManifest.xml:31:17-49
+160            <meta-data
+160-->[androidx.lifecycle:lifecycle-process:2.6.2] /Users/rehan/.gradle/caches/9.3.1/transforms/b29a3c74567194540704c2ab54f6b722/transformed/lifecycle-process-2.6.2/AndroidManifest.xml:29:13-31:52
+161                android:name="androidx.lifecycle.ProcessLifecycleInitializer"
+161-->[androidx.lifecycle:lifecycle-process:2.6.2] /Users/rehan/.gradle/caches/9.3.1/transforms/b29a3c74567194540704c2ab54f6b722/transformed/lifecycle-process-2.6.2/AndroidManifest.xml:30:17-78
+162                android:value="androidx.startup" />
+162-->[androidx.lifecycle:lifecycle-process:2.6.2] /Users/rehan/.gradle/caches/9.3.1/transforms/b29a3c74567194540704c2ab54f6b722/transformed/lifecycle-process-2.6.2/AndroidManifest.xml:31:17-49
+163            <meta-data
+163-->[androidx.profileinstaller:profileinstaller:1.3.1] /Users/rehan/.gradle/caches/9.3.1/transforms/1d0ba85ddfda165e8e49047f748f73a8/transformed/profileinstaller-1.3.1/AndroidManifest.xml:29:13-31:52
+164                android:name="androidx.profileinstaller.ProfileInstallerInitializer"
+164-->[androidx.profileinstaller:profileinstaller:1.3.1] /Users/rehan/.gradle/caches/9.3.1/transforms/1d0ba85ddfda165e8e49047f748f73a8/transformed/profileinstaller-1.3.1/AndroidManifest.xml:30:17-85
+165                android:value="androidx.startup" />
+165-->[androidx.profileinstaller:profileinstaller:1.3.1] /Users/rehan/.gradle/caches/9.3.1/transforms/1d0ba85ddfda165e8e49047f748f73a8/transformed/profileinstaller-1.3.1/AndroidManifest.xml:31:17-49
+166        </provider>
+167
+168        <service
+168-->[androidx.work:work-runtime:2.9.1] /Users/rehan/.gradle/caches/9.3.1/transforms/1e29e10af4eaaf3e9b3752bef6c9b872/transformed/work-runtime-2.9.1/AndroidManifest.xml:39:9-45:35
+169            android:name="androidx.work.impl.background.systemalarm.SystemAlarmService"
+169-->[androidx.work:work-runtime:2.9.1] /Users/rehan/.gradle/caches/9.3.1/transforms/1e29e10af4eaaf3e9b3752bef6c9b872/transformed/work-runtime-2.9.1/AndroidManifest.xml:40:13-88
+170            android:directBootAware="false"
+170-->[androidx.work:work-runtime:2.9.1] /Users/rehan/.gradle/caches/9.3.1/transforms/1e29e10af4eaaf3e9b3752bef6c9b872/transformed/work-runtime-2.9.1/AndroidManifest.xml:41:13-44
+171            android:enabled="@bool/enable_system_alarm_service_default"
+171-->[androidx.work:work-runtime:2.9.1] /Users/rehan/.gradle/caches/9.3.1/transforms/1e29e10af4eaaf3e9b3752bef6c9b872/transformed/work-runtime-2.9.1/AndroidManifest.xml:42:13-72
+172            android:exported="false" />
+172-->[androidx.work:work-runtime:2.9.1] /Users/rehan/.gradle/caches/9.3.1/transforms/1e29e10af4eaaf3e9b3752bef6c9b872/transformed/work-runtime-2.9.1/AndroidManifest.xml:43:13-37
+173        <service
+173-->[androidx.work:work-runtime:2.9.1] /Users/rehan/.gradle/caches/9.3.1/transforms/1e29e10af4eaaf3e9b3752bef6c9b872/transformed/work-runtime-2.9.1/AndroidManifest.xml:46:9-52:35
+174            android:name="androidx.work.impl.background.systemjob.SystemJobService"
+174-->[androidx.work:work-runtime:2.9.1] /Users/rehan/.gradle/caches/9.3.1/transforms/1e29e10af4eaaf3e9b3752bef6c9b872/transformed/work-runtime-2.9.1/AndroidManifest.xml:47:13-84
+175            android:directBootAware="false"
+175-->[androidx.work:work-runtime:2.9.1] /Users/rehan/.gradle/caches/9.3.1/transforms/1e29e10af4eaaf3e9b3752bef6c9b872/transformed/work-runtime-2.9.1/AndroidManifest.xml:48:13-44
+176            android:enabled="@bool/enable_system_job_service_default"
+176-->[androidx.work:work-runtime:2.9.1] /Users/rehan/.gradle/caches/9.3.1/transforms/1e29e10af4eaaf3e9b3752bef6c9b872/transformed/work-runtime-2.9.1/AndroidManifest.xml:49:13-70
+177            android:exported="true"
+177-->[androidx.work:work-runtime:2.9.1] /Users/rehan/.gradle/caches/9.3.1/transforms/1e29e10af4eaaf3e9b3752bef6c9b872/transformed/work-runtime-2.9.1/AndroidManifest.xml:50:13-36
+178            android:permission="android.permission.BIND_JOB_SERVICE" />
+178-->[androidx.work:work-runtime:2.9.1] /Users/rehan/.gradle/caches/9.3.1/transforms/1e29e10af4eaaf3e9b3752bef6c9b872/transformed/work-runtime-2.9.1/AndroidManifest.xml:51:13-69
+179        <service
+179-->[androidx.work:work-runtime:2.9.1] /Users/rehan/.gradle/caches/9.3.1/transforms/1e29e10af4eaaf3e9b3752bef6c9b872/transformed/work-runtime-2.9.1/AndroidManifest.xml:53:9-59:35
+180            android:name="androidx.work.impl.foreground.SystemForegroundService"
+180-->[androidx.work:work-runtime:2.9.1] /Users/rehan/.gradle/caches/9.3.1/transforms/1e29e10af4eaaf3e9b3752bef6c9b872/transformed/work-runtime-2.9.1/AndroidManifest.xml:54:13-81
+181            android:directBootAware="false"
+181-->[androidx.work:work-runtime:2.9.1] /Users/rehan/.gradle/caches/9.3.1/transforms/1e29e10af4eaaf3e9b3752bef6c9b872/transformed/work-runtime-2.9.1/AndroidManifest.xml:55:13-44
+182            android:enabled="@bool/enable_system_foreground_service_default"
+182-->[androidx.work:work-runtime:2.9.1] /Users/rehan/.gradle/caches/9.3.1/transforms/1e29e10af4eaaf3e9b3752bef6c9b872/transformed/work-runtime-2.9.1/AndroidManifest.xml:56:13-77
+183            android:exported="false" />
+183-->[androidx.work:work-runtime:2.9.1] /Users/rehan/.gradle/caches/9.3.1/transforms/1e29e10af4eaaf3e9b3752bef6c9b872/transformed/work-runtime-2.9.1/AndroidManifest.xml:57:13-37
+184
+185        <receiver
+185-->[androidx.work:work-runtime:2.9.1] /Users/rehan/.gradle/caches/9.3.1/transforms/1e29e10af4eaaf3e9b3752bef6c9b872/transformed/work-runtime-2.9.1/AndroidManifest.xml:61:9-66:35
+186            android:name="androidx.work.impl.utils.ForceStopRunnable$BroadcastReceiver"
+186-->[androidx.work:work-runtime:2.9.1] /Users/rehan/.gradle/caches/9.3.1/transforms/1e29e10af4eaaf3e9b3752bef6c9b872/transformed/work-runtime-2.9.1/AndroidManifest.xml:62:13-88
+187            android:directBootAware="false"
+187-->[androidx.work:work-runtime:2.9.1] /Users/rehan/.gradle/caches/9.3.1/transforms/1e29e10af4eaaf3e9b3752bef6c9b872/transformed/work-runtime-2.9.1/AndroidManifest.xml:63:13-44
+188            android:enabled="true"
+188-->[androidx.work:work-runtime:2.9.1] /Users/rehan/.gradle/caches/9.3.1/transforms/1e29e10af4eaaf3e9b3752bef6c9b872/transformed/work-runtime-2.9.1/AndroidManifest.xml:64:13-35
+189            android:exported="false" />
+189-->[androidx.work:work-runtime:2.9.1] /Users/rehan/.gradle/caches/9.3.1/transforms/1e29e10af4eaaf3e9b3752bef6c9b872/transformed/work-runtime-2.9.1/AndroidManifest.xml:65:13-37
+190        <receiver
+190-->[androidx.work:work-runtime:2.9.1] /Users/rehan/.gradle/caches/9.3.1/transforms/1e29e10af4eaaf3e9b3752bef6c9b872/transformed/work-runtime-2.9.1/AndroidManifest.xml:67:9-77:20
+191            android:name="androidx.work.impl.background.systemalarm.ConstraintProxy$BatteryChargingProxy"
+191-->[androidx.work:work-runtime:2.9.1] /Users/rehan/.gradle/caches/9.3.1/transforms/1e29e10af4eaaf3e9b3752bef6c9b872/transformed/work-runtime-2.9.1/AndroidManifest.xml:68:13-106
+192            android:directBootAware="false"
+192-->[androidx.work:work-runtime:2.9.1] /Users/rehan/.gradle/caches/9.3.1/transforms/1e29e10af4eaaf3e9b3752bef6c9b872/transformed/work-runtime-2.9.1/AndroidManifest.xml:69:13-44
+193            android:enabled="false"
+193-->[androidx.work:work-runtime:2.9.1] /Users/rehan/.gradle/caches/9.3.1/transforms/1e29e10af4eaaf3e9b3752bef6c9b872/transformed/work-runtime-2.9.1/AndroidManifest.xml:70:13-36
+194            android:exported="false" >
+194-->[androidx.work:work-runtime:2.9.1] /Users/rehan/.gradle/caches/9.3.1/transforms/1e29e10af4eaaf3e9b3752bef6c9b872/transformed/work-runtime-2.9.1/AndroidManifest.xml:71:13-37
+195            <intent-filter>
+195-->[androidx.work:work-runtime:2.9.1] /Users/rehan/.gradle/caches/9.3.1/transforms/1e29e10af4eaaf3e9b3752bef6c9b872/transformed/work-runtime-2.9.1/AndroidManifest.xml:73:13-76:29
+196                <action android:name="android.intent.action.ACTION_POWER_CONNECTED" />
+196-->[androidx.work:work-runtime:2.9.1] /Users/rehan/.gradle/caches/9.3.1/transforms/1e29e10af4eaaf3e9b3752bef6c9b872/transformed/work-runtime-2.9.1/AndroidManifest.xml:74:17-87
+196-->[androidx.work:work-runtime:2.9.1] /Users/rehan/.gradle/caches/9.3.1/transforms/1e29e10af4eaaf3e9b3752bef6c9b872/transformed/work-runtime-2.9.1/AndroidManifest.xml:74:25-84
+197                <action android:name="android.intent.action.ACTION_POWER_DISCONNECTED" />
+197-->[androidx.work:work-runtime:2.9.1] /Users/rehan/.gradle/caches/9.3.1/transforms/1e29e10af4eaaf3e9b3752bef6c9b872/transformed/work-runtime-2.9.1/AndroidManifest.xml:75:17-90
+197-->[androidx.work:work-runtime:2.9.1] /Users/rehan/.gradle/caches/9.3.1/transforms/1e29e10af4eaaf3e9b3752bef6c9b872/transformed/work-runtime-2.9.1/AndroidManifest.xml:75:25-87
+198            </intent-filter>
+199        </receiver>
+200        <receiver
+200-->[androidx.work:work-runtime:2.9.1] /Users/rehan/.gradle/caches/9.3.1/transforms/1e29e10af4eaaf3e9b3752bef6c9b872/transformed/work-runtime-2.9.1/AndroidManifest.xml:78:9-88:20
+201            android:name="androidx.work.impl.background.systemalarm.ConstraintProxy$BatteryNotLowProxy"
+201-->[androidx.work:work-runtime:2.9.1] /Users/rehan/.gradle/caches/9.3.1/transforms/1e29e10af4eaaf3e9b3752bef6c9b872/transformed/work-runtime-2.9.1/AndroidManifest.xml:79:13-104
+202            android:directBootAware="false"
+202-->[androidx.work:work-runtime:2.9.1] /Users/rehan/.gradle/caches/9.3.1/transforms/1e29e10af4eaaf3e9b3752bef6c9b872/transformed/work-runtime-2.9.1/AndroidManifest.xml:80:13-44
+203            android:enabled="false"
+203-->[androidx.work:work-runtime:2.9.1] /Users/rehan/.gradle/caches/9.3.1/transforms/1e29e10af4eaaf3e9b3752bef6c9b872/transformed/work-runtime-2.9.1/AndroidManifest.xml:81:13-36
+204            android:exported="false" >
+204-->[androidx.work:work-runtime:2.9.1] /Users/rehan/.gradle/caches/9.3.1/transforms/1e29e10af4eaaf3e9b3752bef6c9b872/transformed/work-runtime-2.9.1/AndroidManifest.xml:82:13-37
+205            <intent-filter>
+205-->[androidx.work:work-runtime:2.9.1] /Users/rehan/.gradle/caches/9.3.1/transforms/1e29e10af4eaaf3e9b3752bef6c9b872/transformed/work-runtime-2.9.1/AndroidManifest.xml:84:13-87:29
+206                <action android:name="android.intent.action.BATTERY_OKAY" />
+206-->[androidx.work:work-runtime:2.9.1] /Users/rehan/.gradle/caches/9.3.1/transforms/1e29e10af4eaaf3e9b3752bef6c9b872/transformed/work-runtime-2.9.1/AndroidManifest.xml:85:17-77
+206-->[androidx.work:work-runtime:2.9.1] /Users/rehan/.gradle/caches/9.3.1/transforms/1e29e10af4eaaf3e9b3752bef6c9b872/transformed/work-runtime-2.9.1/AndroidManifest.xml:85:25-74
+207                <action android:name="android.intent.action.BATTERY_LOW" />
+207-->[androidx.work:work-runtime:2.9.1] /Users/rehan/.gradle/caches/9.3.1/transforms/1e29e10af4eaaf3e9b3752bef6c9b872/transformed/work-runtime-2.9.1/AndroidManifest.xml:86:17-76
+207-->[androidx.work:work-runtime:2.9.1] /Users/rehan/.gradle/caches/9.3.1/transforms/1e29e10af4eaaf3e9b3752bef6c9b872/transformed/work-runtime-2.9.1/AndroidManifest.xml:86:25-73
+208            </intent-filter>
+209        </receiver>
+210        <receiver
+210-->[androidx.work:work-runtime:2.9.1] /Users/rehan/.gradle/caches/9.3.1/transforms/1e29e10af4eaaf3e9b3752bef6c9b872/transformed/work-runtime-2.9.1/AndroidManifest.xml:89:9-99:20
+211            android:name="androidx.work.impl.background.systemalarm.ConstraintProxy$StorageNotLowProxy"
+211-->[androidx.work:work-runtime:2.9.1] /Users/rehan/.gradle/caches/9.3.1/transforms/1e29e10af4eaaf3e9b3752bef6c9b872/transformed/work-runtime-2.9.1/AndroidManifest.xml:90:13-104
+212            android:directBootAware="false"
+212-->[androidx.work:work-runtime:2.9.1] /Users/rehan/.gradle/caches/9.3.1/transforms/1e29e10af4eaaf3e9b3752bef6c9b872/transformed/work-runtime-2.9.1/AndroidManifest.xml:91:13-44
+213            android:enabled="false"
+213-->[androidx.work:work-runtime:2.9.1] /Users/rehan/.gradle/caches/9.3.1/transforms/1e29e10af4eaaf3e9b3752bef6c9b872/transformed/work-runtime-2.9.1/AndroidManifest.xml:92:13-36
+214            android:exported="false" >
+214-->[androidx.work:work-runtime:2.9.1] /Users/rehan/.gradle/caches/9.3.1/transforms/1e29e10af4eaaf3e9b3752bef6c9b872/transformed/work-runtime-2.9.1/AndroidManifest.xml:93:13-37
+215            <intent-filter>
+215-->[androidx.work:work-runtime:2.9.1] /Users/rehan/.gradle/caches/9.3.1/transforms/1e29e10af4eaaf3e9b3752bef6c9b872/transformed/work-runtime-2.9.1/AndroidManifest.xml:95:13-98:29
+216                <action android:name="android.intent.action.DEVICE_STORAGE_LOW" />
+216-->[androidx.work:work-runtime:2.9.1] /Users/rehan/.gradle/caches/9.3.1/transforms/1e29e10af4eaaf3e9b3752bef6c9b872/transformed/work-runtime-2.9.1/AndroidManifest.xml:96:17-83
+216-->[androidx.work:work-runtime:2.9.1] /Users/rehan/.gradle/caches/9.3.1/transforms/1e29e10af4eaaf3e9b3752bef6c9b872/transformed/work-runtime-2.9.1/AndroidManifest.xml:96:25-80
+217                <action android:name="android.intent.action.DEVICE_STORAGE_OK" />
+217-->[androidx.work:work-runtime:2.9.1] /Users/rehan/.gradle/caches/9.3.1/transforms/1e29e10af4eaaf3e9b3752bef6c9b872/transformed/work-runtime-2.9.1/AndroidManifest.xml:97:17-82
+217-->[androidx.work:work-runtime:2.9.1] /Users/rehan/.gradle/caches/9.3.1/transforms/1e29e10af4eaaf3e9b3752bef6c9b872/transformed/work-runtime-2.9.1/AndroidManifest.xml:97:25-79
+218            </intent-filter>
+219        </receiver>
+220        <receiver
+220-->[androidx.work:work-runtime:2.9.1] /Users/rehan/.gradle/caches/9.3.1/transforms/1e29e10af4eaaf3e9b3752bef6c9b872/transformed/work-runtime-2.9.1/AndroidManifest.xml:100:9-109:20
+221            android:name="androidx.work.impl.background.systemalarm.ConstraintProxy$NetworkStateProxy"
+221-->[androidx.work:work-runtime:2.9.1] /Users/rehan/.gradle/caches/9.3.1/transforms/1e29e10af4eaaf3e9b3752bef6c9b872/transformed/work-runtime-2.9.1/AndroidManifest.xml:101:13-103
+222            android:directBootAware="false"
+222-->[androidx.work:work-runtime:2.9.1] /Users/rehan/.gradle/caches/9.3.1/transforms/1e29e10af4eaaf3e9b3752bef6c9b872/transformed/work-runtime-2.9.1/AndroidManifest.xml:102:13-44
+223            android:enabled="false"
+223-->[androidx.work:work-runtime:2.9.1] /Users/rehan/.gradle/caches/9.3.1/transforms/1e29e10af4eaaf3e9b3752bef6c9b872/transformed/work-runtime-2.9.1/AndroidManifest.xml:103:13-36
+224            android:exported="false" >
+224-->[androidx.work:work-runtime:2.9.1] /Users/rehan/.gradle/caches/9.3.1/transforms/1e29e10af4eaaf3e9b3752bef6c9b872/transformed/work-runtime-2.9.1/AndroidManifest.xml:104:13-37
+225            <intent-filter>
+225-->[androidx.work:work-runtime:2.9.1] /Users/rehan/.gradle/caches/9.3.1/transforms/1e29e10af4eaaf3e9b3752bef6c9b872/transformed/work-runtime-2.9.1/AndroidManifest.xml:106:13-108:29
+226                <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
+226-->[androidx.work:work-runtime:2.9.1] /Users/rehan/.gradle/caches/9.3.1/transforms/1e29e10af4eaaf3e9b3752bef6c9b872/transformed/work-runtime-2.9.1/AndroidManifest.xml:107:17-79
+226-->[androidx.work:work-runtime:2.9.1] /Users/rehan/.gradle/caches/9.3.1/transforms/1e29e10af4eaaf3e9b3752bef6c9b872/transformed/work-runtime-2.9.1/AndroidManifest.xml:107:25-76
+227            </intent-filter>
+228        </receiver>
+229        <receiver
+229-->[androidx.work:work-runtime:2.9.1] /Users/rehan/.gradle/caches/9.3.1/transforms/1e29e10af4eaaf3e9b3752bef6c9b872/transformed/work-runtime-2.9.1/AndroidManifest.xml:110:9-121:20
+230            android:name="androidx.work.impl.background.systemalarm.RescheduleReceiver"
+230-->[androidx.work:work-runtime:2.9.1] /Users/rehan/.gradle/caches/9.3.1/transforms/1e29e10af4eaaf3e9b3752bef6c9b872/transformed/work-runtime-2.9.1/AndroidManifest.xml:111:13-88
+231            android:directBootAware="false"
+231-->[androidx.work:work-runtime:2.9.1] /Users/rehan/.gradle/caches/9.3.1/transforms/1e29e10af4eaaf3e9b3752bef6c9b872/transformed/work-runtime-2.9.1/AndroidManifest.xml:112:13-44
+232            android:enabled="false"
+232-->[androidx.work:work-runtime:2.9.1] /Users/rehan/.gradle/caches/9.3.1/transforms/1e29e10af4eaaf3e9b3752bef6c9b872/transformed/work-runtime-2.9.1/AndroidManifest.xml:113:13-36
+233            android:exported="false" >
+233-->[androidx.work:work-runtime:2.9.1] /Users/rehan/.gradle/caches/9.3.1/transforms/1e29e10af4eaaf3e9b3752bef6c9b872/transformed/work-runtime-2.9.1/AndroidManifest.xml:114:13-37
+234            <intent-filter>
+234-->[androidx.work:work-runtime:2.9.1] /Users/rehan/.gradle/caches/9.3.1/transforms/1e29e10af4eaaf3e9b3752bef6c9b872/transformed/work-runtime-2.9.1/AndroidManifest.xml:116:13-120:29
+235                <action android:name="android.intent.action.BOOT_COMPLETED" />
+235-->[host.exp.exponent:expo.modules.taskmanager:57.0.22] /Users/rehan/.gradle/caches/9.3.1/transforms/e07ab6cc71bc7b56cbc41a944ee4f047/transformed/expo.modules.taskmanager-57.0.22/AndroidManifest.xml:13:17-79
+235-->[host.exp.exponent:expo.modules.taskmanager:57.0.22] /Users/rehan/.gradle/caches/9.3.1/transforms/e07ab6cc71bc7b56cbc41a944ee4f047/transformed/expo.modules.taskmanager-57.0.22/AndroidManifest.xml:13:25-76
+236                <action android:name="android.intent.action.TIME_SET" />
+236-->[androidx.work:work-runtime:2.9.1] /Users/rehan/.gradle/caches/9.3.1/transforms/1e29e10af4eaaf3e9b3752bef6c9b872/transformed/work-runtime-2.9.1/AndroidManifest.xml:118:17-73
+236-->[androidx.work:work-runtime:2.9.1] /Users/rehan/.gradle/caches/9.3.1/transforms/1e29e10af4eaaf3e9b3752bef6c9b872/transformed/work-runtime-2.9.1/AndroidManifest.xml:118:25-70
+237                <action android:name="android.intent.action.TIMEZONE_CHANGED" />
+237-->[androidx.work:work-runtime:2.9.1] /Users/rehan/.gradle/caches/9.3.1/transforms/1e29e10af4eaaf3e9b3752bef6c9b872/transformed/work-runtime-2.9.1/AndroidManifest.xml:119:17-81
+237-->[androidx.work:work-runtime:2.9.1] /Users/rehan/.gradle/caches/9.3.1/transforms/1e29e10af4eaaf3e9b3752bef6c9b872/transformed/work-runtime-2.9.1/AndroidManifest.xml:119:25-78
+238            </intent-filter>
+239        </receiver>
+240        <receiver
+240-->[androidx.work:work-runtime:2.9.1] /Users/rehan/.gradle/caches/9.3.1/transforms/1e29e10af4eaaf3e9b3752bef6c9b872/transformed/work-runtime-2.9.1/AndroidManifest.xml:122:9-131:20
+241            android:name="androidx.work.impl.background.systemalarm.ConstraintProxyUpdateReceiver"
+241-->[androidx.work:work-runtime:2.9.1] /Users/rehan/.gradle/caches/9.3.1/transforms/1e29e10af4eaaf3e9b3752bef6c9b872/transformed/work-runtime-2.9.1/AndroidManifest.xml:123:13-99
+242            android:directBootAware="false"
+242-->[androidx.work:work-runtime:2.9.1] /Users/rehan/.gradle/caches/9.3.1/transforms/1e29e10af4eaaf3e9b3752bef6c9b872/transformed/work-runtime-2.9.1/AndroidManifest.xml:124:13-44
+243            android:enabled="@bool/enable_system_alarm_service_default"
+243-->[androidx.work:work-runtime:2.9.1] /Users/rehan/.gradle/caches/9.3.1/transforms/1e29e10af4eaaf3e9b3752bef6c9b872/transformed/work-runtime-2.9.1/AndroidManifest.xml:125:13-72
+244            android:exported="false" >
+244-->[androidx.work:work-runtime:2.9.1] /Users/rehan/.gradle/caches/9.3.1/transforms/1e29e10af4eaaf3e9b3752bef6c9b872/transformed/work-runtime-2.9.1/AndroidManifest.xml:126:13-37
+245            <intent-filter>
+245-->[androidx.work:work-runtime:2.9.1] /Users/rehan/.gradle/caches/9.3.1/transforms/1e29e10af4eaaf3e9b3752bef6c9b872/transformed/work-runtime-2.9.1/AndroidManifest.xml:128:13-130:29
+246                <action android:name="androidx.work.impl.background.systemalarm.UpdateProxies" />
+246-->[androidx.work:work-runtime:2.9.1] /Users/rehan/.gradle/caches/9.3.1/transforms/1e29e10af4eaaf3e9b3752bef6c9b872/transformed/work-runtime-2.9.1/AndroidManifest.xml:129:17-98
+246-->[androidx.work:work-runtime:2.9.1] /Users/rehan/.gradle/caches/9.3.1/transforms/1e29e10af4eaaf3e9b3752bef6c9b872/transformed/work-runtime-2.9.1/AndroidManifest.xml:129:25-95
+247            </intent-filter>
+248        </receiver>
+249        <receiver
+249-->[androidx.work:work-runtime:2.9.1] /Users/rehan/.gradle/caches/9.3.1/transforms/1e29e10af4eaaf3e9b3752bef6c9b872/transformed/work-runtime-2.9.1/AndroidManifest.xml:132:9-142:20
+250            android:name="androidx.work.impl.diagnostics.DiagnosticsReceiver"
+250-->[androidx.work:work-runtime:2.9.1] /Users/rehan/.gradle/caches/9.3.1/transforms/1e29e10af4eaaf3e9b3752bef6c9b872/transformed/work-runtime-2.9.1/AndroidManifest.xml:133:13-78
+251            android:directBootAware="false"
+251-->[androidx.work:work-runtime:2.9.1] /Users/rehan/.gradle/caches/9.3.1/transforms/1e29e10af4eaaf3e9b3752bef6c9b872/transformed/work-runtime-2.9.1/AndroidManifest.xml:134:13-44
+252            android:enabled="true"
+252-->[androidx.work:work-runtime:2.9.1] /Users/rehan/.gradle/caches/9.3.1/transforms/1e29e10af4eaaf3e9b3752bef6c9b872/transformed/work-runtime-2.9.1/AndroidManifest.xml:135:13-35
+253            android:exported="true"
+253-->[androidx.work:work-runtime:2.9.1] /Users/rehan/.gradle/caches/9.3.1/transforms/1e29e10af4eaaf3e9b3752bef6c9b872/transformed/work-runtime-2.9.1/AndroidManifest.xml:136:13-36
+254            android:permission="android.permission.DUMP" >
+254-->[androidx.work:work-runtime:2.9.1] /Users/rehan/.gradle/caches/9.3.1/transforms/1e29e10af4eaaf3e9b3752bef6c9b872/transformed/work-runtime-2.9.1/AndroidManifest.xml:137:13-57
+255            <intent-filter>
+255-->[androidx.work:work-runtime:2.9.1] /Users/rehan/.gradle/caches/9.3.1/transforms/1e29e10af4eaaf3e9b3752bef6c9b872/transformed/work-runtime-2.9.1/AndroidManifest.xml:139:13-141:29
+256                <action android:name="androidx.work.diagnostics.REQUEST_DIAGNOSTICS" />
+256-->[androidx.work:work-runtime:2.9.1] /Users/rehan/.gradle/caches/9.3.1/transforms/1e29e10af4eaaf3e9b3752bef6c9b872/transformed/work-runtime-2.9.1/AndroidManifest.xml:140:17-88
+256-->[androidx.work:work-runtime:2.9.1] /Users/rehan/.gradle/caches/9.3.1/transforms/1e29e10af4eaaf3e9b3752bef6c9b872/transformed/work-runtime-2.9.1/AndroidManifest.xml:140:25-85
+257            </intent-filter>
+258        </receiver>
+259
+260        <service
+260-->[androidx.room:room-runtime:2.5.0] /Users/rehan/.gradle/caches/9.3.1/transforms/76ea950dfea430053fc6889fafb4ec4c/transformed/room-runtime-2.5.0/AndroidManifest.xml:24:9-28:63
+261            android:name="androidx.room.MultiInstanceInvalidationService"
+261-->[androidx.room:room-runtime:2.5.0] /Users/rehan/.gradle/caches/9.3.1/transforms/76ea950dfea430053fc6889fafb4ec4c/transformed/room-runtime-2.5.0/AndroidManifest.xml:25:13-74
+262            android:directBootAware="true"
+262-->[androidx.room:room-runtime:2.5.0] /Users/rehan/.gradle/caches/9.3.1/transforms/76ea950dfea430053fc6889fafb4ec4c/transformed/room-runtime-2.5.0/AndroidManifest.xml:26:13-43
+263            android:exported="false" />
+263-->[androidx.room:room-runtime:2.5.0] /Users/rehan/.gradle/caches/9.3.1/transforms/76ea950dfea430053fc6889fafb4ec4c/transformed/room-runtime-2.5.0/AndroidManifest.xml:27:13-37
+264
+265        <meta-data
+265-->[com.google.maps.android:android-maps-utils:3.10.0] /Users/rehan/.gradle/caches/9.3.1/transforms/2cdc8127e87f13e82b6d66fb419ba841/transformed/android-maps-utils-3.10.0/AndroidManifest.xml:23:9-25:69
+266            android:name="com.google.android.gms.version"
+266-->[com.google.maps.android:android-maps-utils:3.10.0] /Users/rehan/.gradle/caches/9.3.1/transforms/2cdc8127e87f13e82b6d66fb419ba841/transformed/android-maps-utils-3.10.0/AndroidManifest.xml:24:13-58
+267            android:value="@integer/google_play_services_version" />
+267-->[com.google.maps.android:android-maps-utils:3.10.0] /Users/rehan/.gradle/caches/9.3.1/transforms/2cdc8127e87f13e82b6d66fb419ba841/transformed/android-maps-utils-3.10.0/AndroidManifest.xml:25:13-66
+268
+269        <uses-library
+269-->[androidx.window:window:1.5.1] /Users/rehan/.gradle/caches/9.3.1/transforms/1a0ae8880051760b1053b2a612c98bc1/transformed/window-1.5.1/AndroidManifest.xml:23:9-25:40
+270            android:name="androidx.window.extensions"
+270-->[androidx.window:window:1.5.1] /Users/rehan/.gradle/caches/9.3.1/transforms/1a0ae8880051760b1053b2a612c98bc1/transformed/window-1.5.1/AndroidManifest.xml:24:13-54
+271            android:required="false" />
+271-->[androidx.window:window:1.5.1] /Users/rehan/.gradle/caches/9.3.1/transforms/1a0ae8880051760b1053b2a612c98bc1/transformed/window-1.5.1/AndroidManifest.xml:25:13-37
+272        <uses-library
+272-->[androidx.window:window:1.5.1] /Users/rehan/.gradle/caches/9.3.1/transforms/1a0ae8880051760b1053b2a612c98bc1/transformed/window-1.5.1/AndroidManifest.xml:26:9-28:40
+273            android:name="androidx.window.sidecar"
+273-->[androidx.window:window:1.5.1] /Users/rehan/.gradle/caches/9.3.1/transforms/1a0ae8880051760b1053b2a612c98bc1/transformed/window-1.5.1/AndroidManifest.xml:27:13-51
+274            android:required="false" /> <!-- Needs to be explicitly declared on P+ -->
+274-->[androidx.window:window:1.5.1] /Users/rehan/.gradle/caches/9.3.1/transforms/1a0ae8880051760b1053b2a612c98bc1/transformed/window-1.5.1/AndroidManifest.xml:28:13-37
+275        <uses-library
+275-->[com.google.android.gms:play-services-maps:19.1.0] /Users/rehan/.gradle/caches/9.3.1/transforms/caeb8ee886f970ee2362821ac662fbe6/transformed/play-services-maps-19.1.0/AndroidManifest.xml:33:7-86
+276            android:name="org.apache.http.legacy"
+276-->[com.google.android.gms:play-services-maps:19.1.0] /Users/rehan/.gradle/caches/9.3.1/transforms/caeb8ee886f970ee2362821ac662fbe6/transformed/play-services-maps-19.1.0/AndroidManifest.xml:33:21-58
+277            android:required="false" />
+277-->[com.google.android.gms:play-services-maps:19.1.0] /Users/rehan/.gradle/caches/9.3.1/transforms/caeb8ee886f970ee2362821ac662fbe6/transformed/play-services-maps-19.1.0/AndroidManifest.xml:33:59-83
+278
+279        <activity
+279-->[com.google.android.gms:play-services-base:18.5.0] /Users/rehan/.gradle/caches/9.3.1/transforms/401005f47163320330f3c80239eefead/transformed/play-services-base-18.5.0/AndroidManifest.xml:5:9-173
+280            android:name="com.google.android.gms.common.api.GoogleApiActivity"
+280-->[com.google.android.gms:play-services-base:18.5.0] /Users/rehan/.gradle/caches/9.3.1/transforms/401005f47163320330f3c80239eefead/transformed/play-services-base-18.5.0/AndroidManifest.xml:5:19-85
+281            android:exported="false"
+281-->[com.google.android.gms:play-services-base:18.5.0] /Users/rehan/.gradle/caches/9.3.1/transforms/401005f47163320330f3c80239eefead/transformed/play-services-base-18.5.0/AndroidManifest.xml:5:146-170
+282            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+282-->[com.google.android.gms:play-services-base:18.5.0] /Users/rehan/.gradle/caches/9.3.1/transforms/401005f47163320330f3c80239eefead/transformed/play-services-base-18.5.0/AndroidManifest.xml:5:86-145
+283
+284        <receiver
+284-->[androidx.profileinstaller:profileinstaller:1.3.1] /Users/rehan/.gradle/caches/9.3.1/transforms/1d0ba85ddfda165e8e49047f748f73a8/transformed/profileinstaller-1.3.1/AndroidManifest.xml:34:9-52:20
+285            android:name="androidx.profileinstaller.ProfileInstallReceiver"
+285-->[androidx.profileinstaller:profileinstaller:1.3.1] /Users/rehan/.gradle/caches/9.3.1/transforms/1d0ba85ddfda165e8e49047f748f73a8/transformed/profileinstaller-1.3.1/AndroidManifest.xml:35:13-76
+286            android:directBootAware="false"
+286-->[androidx.profileinstaller:profileinstaller:1.3.1] /Users/rehan/.gradle/caches/9.3.1/transforms/1d0ba85ddfda165e8e49047f748f73a8/transformed/profileinstaller-1.3.1/AndroidManifest.xml:36:13-44
+287            android:enabled="true"
+287-->[androidx.profileinstaller:profileinstaller:1.3.1] /Users/rehan/.gradle/caches/9.3.1/transforms/1d0ba85ddfda165e8e49047f748f73a8/transformed/profileinstaller-1.3.1/AndroidManifest.xml:37:13-35
+288            android:exported="true"
+288-->[androidx.profileinstaller:profileinstaller:1.3.1] /Users/rehan/.gradle/caches/9.3.1/transforms/1d0ba85ddfda165e8e49047f748f73a8/transformed/profileinstaller-1.3.1/AndroidManifest.xml:38:13-36
+289            android:permission="android.permission.DUMP" >
+289-->[androidx.profileinstaller:profileinstaller:1.3.1] /Users/rehan/.gradle/caches/9.3.1/transforms/1d0ba85ddfda165e8e49047f748f73a8/transformed/profileinstaller-1.3.1/AndroidManifest.xml:39:13-57
+290            <intent-filter>
+290-->[androidx.profileinstaller:profileinstaller:1.3.1] /Users/rehan/.gradle/caches/9.3.1/transforms/1d0ba85ddfda165e8e49047f748f73a8/transformed/profileinstaller-1.3.1/AndroidManifest.xml:40:13-42:29
+291                <action android:name="androidx.profileinstaller.action.INSTALL_PROFILE" />
+291-->[androidx.profileinstaller:profileinstaller:1.3.1] /Users/rehan/.gradle/caches/9.3.1/transforms/1d0ba85ddfda165e8e49047f748f73a8/transformed/profileinstaller-1.3.1/AndroidManifest.xml:41:17-91
+291-->[androidx.profileinstaller:profileinstaller:1.3.1] /Users/rehan/.gradle/caches/9.3.1/transforms/1d0ba85ddfda165e8e49047f748f73a8/transformed/profileinstaller-1.3.1/AndroidManifest.xml:41:25-88
+292            </intent-filter>
+293            <intent-filter>
+293-->[androidx.profileinstaller:profileinstaller:1.3.1] /Users/rehan/.gradle/caches/9.3.1/transforms/1d0ba85ddfda165e8e49047f748f73a8/transformed/profileinstaller-1.3.1/AndroidManifest.xml:43:13-45:29
+294                <action android:name="androidx.profileinstaller.action.SKIP_FILE" />
+294-->[androidx.profileinstaller:profileinstaller:1.3.1] /Users/rehan/.gradle/caches/9.3.1/transforms/1d0ba85ddfda165e8e49047f748f73a8/transformed/profileinstaller-1.3.1/AndroidManifest.xml:44:17-85
+294-->[androidx.profileinstaller:profileinstaller:1.3.1] /Users/rehan/.gradle/caches/9.3.1/transforms/1d0ba85ddfda165e8e49047f748f73a8/transformed/profileinstaller-1.3.1/AndroidManifest.xml:44:25-82
+295            </intent-filter>
+296            <intent-filter>
+296-->[androidx.profileinstaller:profileinstaller:1.3.1] /Users/rehan/.gradle/caches/9.3.1/transforms/1d0ba85ddfda165e8e49047f748f73a8/transformed/profileinstaller-1.3.1/AndroidManifest.xml:46:13-48:29
+297                <action android:name="androidx.profileinstaller.action.SAVE_PROFILE" />
+297-->[androidx.profileinstaller:profileinstaller:1.3.1] /Users/rehan/.gradle/caches/9.3.1/transforms/1d0ba85ddfda165e8e49047f748f73a8/transformed/profileinstaller-1.3.1/AndroidManifest.xml:47:17-88
+297-->[androidx.profileinstaller:profileinstaller:1.3.1] /Users/rehan/.gradle/caches/9.3.1/transforms/1d0ba85ddfda165e8e49047f748f73a8/transformed/profileinstaller-1.3.1/AndroidManifest.xml:47:25-85
+298            </intent-filter>
+299            <intent-filter>
+299-->[androidx.profileinstaller:profileinstaller:1.3.1] /Users/rehan/.gradle/caches/9.3.1/transforms/1d0ba85ddfda165e8e49047f748f73a8/transformed/profileinstaller-1.3.1/AndroidManifest.xml:49:13-51:29
+300                <action android:name="androidx.profileinstaller.action.BENCHMARK_OPERATION" />
+300-->[androidx.profileinstaller:profileinstaller:1.3.1] /Users/rehan/.gradle/caches/9.3.1/transforms/1d0ba85ddfda165e8e49047f748f73a8/transformed/profileinstaller-1.3.1/AndroidManifest.xml:50:17-95
+300-->[androidx.profileinstaller:profileinstaller:1.3.1] /Users/rehan/.gradle/caches/9.3.1/transforms/1d0ba85ddfda165e8e49047f748f73a8/transformed/profileinstaller-1.3.1/AndroidManifest.xml:50:25-92
+301            </intent-filter>
+302        </receiver>
+303    </application>
+304
+305</manifest>

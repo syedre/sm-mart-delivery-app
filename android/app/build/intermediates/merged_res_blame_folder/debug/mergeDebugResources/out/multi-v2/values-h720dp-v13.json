@@ -1,0 +1,19 @@
+{
+    "logs": [
+        {
+            "outputFile": "com.smmart.delivery.app-mergeDebugResources-51:/values-h720dp-v13/values-h720dp-v13.xml",
+            "map": [
+                {
+                    "source": "/Users/rehan/.gradle/caches/9.3.1/transforms/5341f13a56b95de17d863a995f24ac80/transformed/appcompat-1.7.0/res/values-h720dp-v13/values-h720dp-v13.xml",
+                    "from": {
+                        "startLines": "2",
+                        "startColumns": "4",
+                        "startOffsets": "55",
+                        "endColumns": "66",
+                        "endOffsets": "117"
+                    }
+                }
+            ]
+        }
+    ]
+}
