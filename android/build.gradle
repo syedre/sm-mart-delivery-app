@@ -6,9 +6,12 @@ buildscript {
     mavenCentral()
   }
   dependencies {
+    classpath 'com.google.gms:google-services:4.4.4'
     classpath('com.android.tools.build:gradle')
     classpath('com.facebook.react:react-native-gradle-plugin')
-    classpath('org.jetbrains.kotlin:kotlin-gradle-plugin')
+    // Firebase Android SDK 35.0.2 includes artifacts compiled with Kotlin 2.4 metadata.
+    // Keep the app's Kotlin Gradle plugin aligned with the RNFirebase 27.1.0 toolchain.
+    classpath('org.jetbrains.kotlin:kotlin-gradle-plugin:2.4.0')
   }
 }
 
