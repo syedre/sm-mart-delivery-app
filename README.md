@@ -11,7 +11,7 @@ A separate Expo React Native app for SM mart delivery partners.
 
 ## Firebase setup
 
-The app uses the Firebase JavaScript SDK and the separate Firebase project created for SM mart Delivery.
+The app uses the separate Firebase project created for SM mart Delivery. Phone sign-in uses React Native Firebase native modules; the Firebase JavaScript SDK remains available for the planned Realtime Database client.
 
 1. Copy `.env.example` to `.env`.
 2. Fill in the `EXPO_PUBLIC_FIREBASE_*` values from Firebase Console → Project settings → General → Your apps → SM mart Delivery.
