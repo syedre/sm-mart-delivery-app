@@ -119,7 +119,7 @@ function AppContent() {
 
   const signIn = async () => {
     const normalizedEmail = email.trim().toLowerCase();
-    if (!/^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$/.test(normalizedEmail)) {
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(normalizedEmail)) {
       Alert.alert("Check email address", "Enter a valid registered email address.");
       return;
     }
@@ -160,7 +160,7 @@ function AppContent() {
 
   const resetPassword = async () => {
     const normalizedEmail = email.trim().toLowerCase();
-    if (!/^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$/.test(normalizedEmail)) {
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(normalizedEmail)) {
       Alert.alert("Enter your email", "Enter your registered email address first.");
       return;
     }
