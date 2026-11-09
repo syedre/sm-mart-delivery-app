@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import "./src/lib/firebase";
 import {
   getAuth,
@@ -20,8 +20,8 @@ import {
 } from "react-native";
 import MapView, { Marker } from "react-native-maps";
 import * as Location from "expo-location";
-import { SafeAreaView } from "react-native-safe-area-context";
-import { SAMPLE_ORDERS, DeliveryOrder } from "./src/data/orders";
+import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
+import { SAMPLE_ORDERS, type DeliveryOrder } from "./src/data/orders";
 
 type Screen = "login" | "verify" | "orders" | "details" | "active";
 
@@ -36,7 +36,7 @@ const COLORS = {
   orange: "#c87927",
 };
 
-export default function App() {
+function AppContent() {
   const [screen, setScreen] = useState<Screen>("login");
   const [partnerName, setPartnerName] = useState("Delivery Partner");
   const [phone, setPhone] = useState("");
@@ -442,3 +442,11 @@ const styles = StyleSheet.create({
   liveText: { color: COLORS.primary, fontWeight: "800", fontSize: 10 },
   gpsText: { color: COLORS.orange, fontSize: 11, marginTop: 12 },
 });
+
+export default function App() {
+  return (
+    <SafeAreaProvider>
+      <AppContent />
+    </SafeAreaProvider>
+  );
+}
