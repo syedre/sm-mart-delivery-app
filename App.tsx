@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import database from "@react-native-firebase/database";
+import { getDatabase, ref, set, update } from "@react-native-firebase/database";
 import {
   getAuth,
   onAuthStateChanged,
@@ -108,9 +108,7 @@ function AppContent() {
           setLocationText(
             `GPS active · ${latitude.toFixed(5)}, ${longitude.toFixed(5)}`
           );
-          database()
-            .ref(`/deliverySessions/${activeOrderId}`)
-            .update({
+          update(ref(getDatabase(), `/deliverySessions/${activeOrderId}`), {
               location: {
                 latitude,
                 longitude,
@@ -206,7 +204,7 @@ function AppContent() {
         return;
       }
 
-      await database().ref(`/deliverySessions/${order.id}`).set({
+      await set(ref(getDatabase(), `/deliverySessions/${order.id}`), {
         orderId: order.id,
         displayId: order.displayId,
         partnerUid: user.uid,
@@ -233,7 +231,7 @@ function AppContent() {
     if (!activeOrderId) return;
     setBusy(true);
     try {
-      await database().ref(`/deliverySessions/${activeOrderId}`).update({
+      await update(ref(getDatabase(), `/deliverySessions/${activeOrderId}`), {
         status: "delivered",
         completedAt: Date.now(),
         lastUpdatedAt: Date.now(),
