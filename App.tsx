@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import "./src/lib/firebase";
 import auth, { FirebaseAuthTypes } from "@react-native-firebase/auth";
 import {
   ActivityIndicator,
