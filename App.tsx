@@ -63,15 +63,12 @@ function AppContent() {
       const authInstance = getAuth();
       unsubscribe = onAuthStateChanged(authInstance, (user) => {
         if (!mounted) return;
-        if (user?.emailVerified) {
+        if (user) {
           setPartnerName(user.displayName || user.email?.split("@")[0] || "SM mart Delivery Partner");
           setScreen("orders");
           setAuthError(null);
         } else {
           setScreen("login");
-          if (user) {
-            setAuthError("Please verify your email address before accessing deliveries.");
-          }
         }
         setAuthInitializing(false);
       });
