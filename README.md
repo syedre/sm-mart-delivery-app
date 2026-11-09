@@ -26,7 +26,8 @@ Firebase client configuration is not a substitute for database security rules. N
 
 ## Current functionality
 
-- Demo phone-number sign-in (no real authentication or OTP).
+- Firebase Phone Authentication with a 6-digit OTP verification screen.
+- Firebase auth session restoration and sign-out.
 - Local sample assigned orders.
 - Order details and COD summary.
 - Foreground GPS display on the delivery partner's device.
@@ -34,13 +35,13 @@ Firebase client configuration is not a substitute for database security rules. N
 
 ## Not yet enabled
 
-- Firebase Authentication / real delivery partner accounts.
+- Driver authorization/allowlisting (phone verification alone does not establish that someone is an approved driver).
 - Publishing GPS coordinates to Realtime Database.
 - Customer-side live location display.
 - Background GPS tracking.
 - Live assigned-order synchronization with the production order system.
 
-The Firebase app and Realtime Database initialization module is present, but GPS publishing is intentionally not enabled until authentication and database security rules are configured and tested.
+Firebase phone authentication is now wired into the app. The Realtime Database client is initialized from the Firebase web config, but the app does not yet read or write delivery data or GPS coordinates. Those features stay disabled until restrictive database rules and driver authorization are implemented and tested.
 
 
 ## Native Firebase phone authentication setup
