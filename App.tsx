@@ -20,7 +20,7 @@ import {
 import MapView, { Marker } from "react-native-maps";
 import * as Location from "expo-location";
 import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
-type DeliveryOrder = { id: string; displayId: string; address: string; itemsCount: number; codAmount: number; items: { id: string; name: string; unit: string; quantity: number; unitPrice: number }[]; latitude: number | null; longitude: number | null; status: string; };
+type DeliveryOrder = { id: string; displayId: string; address: string; customerPhone: string | null; itemsCount: number; codAmount: number; items: { id: string; name: string; unit: string; quantity: number; unitPrice: number }[]; latitude: number | null; longitude: number | null; status: string; };
 
 type Screen = "login" | "orders" | "details" | "active";
 
@@ -72,6 +72,7 @@ function AppContent() {
           id,
           displayId: String(item.displayId ?? item.orderNumber ?? id),
           address: String(item.address ?? item.addressLabel ?? "Delivery address not provided"),
+          customerPhone: typeof item.customerPhone === "string" && item.customerPhone.trim() ? item.customerPhone : null,
           itemsCount: Number(item.itemsCount ?? items.reduce((sum: number, entry: { quantity: number }) => sum + entry.quantity, 0)),
           codAmount: Number(item.codAmount ?? 0),
           items,
@@ -400,6 +401,14 @@ function AppContent() {
           <View style={styles.detailCard}>
             <Text style={styles.label}>DELIVERY ADDRESS</Text>
             <Text style={styles.address}>{selectedOrder.address}</Text>
+            {selectedOrder.customerPhone ? (
+              <>
+                <Text style={[styles.label, { marginTop: 16 }]}>CUSTOMER MOBILE</Text>
+                <Text style={styles.phoneNumber}>{selectedOrder.customerPhone}</Text>
+              </>
+            ) : (
+              <Text style={styles.body}>Customer mobile number unavailable.</Text>
+            )}
             <View style={styles.separator} />
             <Text style={styles.label}>ORDER SUMMARY · {selectedOrder.itemsCount} ITEMS</Text>
             {selectedOrder.items.length ? selectedOrder.items.map(item => (
@@ -498,6 +507,7 @@ const styles = StyleSheet.create({
   summaryRow: { flexDirection: "row", justifyContent: "space-between", alignItems: "flex-start", paddingVertical: 7, gap: 12 },
   summaryName: { flex: 1, color: COLORS.ink, fontSize: 13, lineHeight: 18 },
   summaryPrice: { color: COLORS.ink, fontSize: 13, fontWeight: "600" },
+  phoneNumber: { color: COLORS.ink, fontSize: 16, fontWeight: "700", marginTop: 2 },
   cashAmount: { color: COLORS.primary, fontSize: 24, fontWeight: "800", marginTop: 4 },
   orderMeta: { color: COLORS.muted, fontSize: 11 },
   viewDetails: { color: COLORS.primary, fontSize: 12, fontWeight: "700" },
