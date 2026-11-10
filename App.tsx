@@ -58,7 +58,7 @@ function AppContent() {
   useEffect(() => {
     const user = getAuth().currentUser;
     if (!user) { setAssignedOrders([]); return; }
-    const unsubscribe = onValue(ref(getDatabase(), "deliveryAssignments"), (snapshot) => {
+    const unsubscribe = onValue(ref(getDatabase(), "partnerAssignments/" + user.uid), (snapshot) => {
       const value = snapshot.val() as Record<string, any> | null;
       const orders = Object.entries(value ?? {}).filter(([, item]) => item?.partnerUid === user.uid && item?.status !== "delivered" && item?.status !== "cancelled").map(([id, item]) => ({ id, displayId: String(item.displayId ?? item.orderNumber ?? id), customerName: String(item.customerName ?? "Customer details unavailable"), address: String(item.address ?? "Delivery address not provided"), itemsCount: Number(item.itemsCount ?? 0), codAmount: Number(item.codAmount ?? 0), note: String(item.note ?? "No delivery note"), latitude: typeof item.latitude === "number" ? item.latitude : null, longitude: typeof item.longitude === "number" ? item.longitude : null, status: String(item.status ?? "assigned") })).filter(order => !completedIds.includes(order.id));
       setAssignedOrders(orders);
@@ -226,6 +226,7 @@ function AppContent() {
         tracking: { active: true },
         location: null,
       });
+      await update(ref(getDatabase(), "partnerAssignments/" + user.uid + "/" + order.id), { status: "in_progress" });
 
       setActiveOrderId(order.id);
       setSelectedOrder(order);
@@ -248,6 +249,8 @@ function AppContent() {
         lastUpdatedAt: Date.now(),
         tracking: { active: false },
       });
+      const user = getAuth().currentUser;
+      if (user) await update(ref(getDatabase(), "partnerAssignments/" + user.uid + "/" + activeOrderId), { status: "delivered" });
       setCompletedIds((current) => [...current, activeOrderId]);
       setActiveOrderId(null);
       setSelectedOrder(null);
