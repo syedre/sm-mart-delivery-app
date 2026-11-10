@@ -60,6 +60,18 @@
       "$orderId": {
         ".read": "auth != null && data.child('partnerUid').val() === auth.uid"
       }
+    },
+    "partnerAssignments": {
+      "$partnerUid": {
+        ".read": "auth != null && auth.uid === $partnerUid",
+        ".write": false,
+        "$orderId": {
+          "status": {
+            ".write": "auth != null && auth.uid === $partnerUid",
+            ".validate": "newData.isString() && (newData.val() === 'assigned' || newData.val() === 'in_progress' || newData.val() === 'delivered')"
+          }
+        }
+      }
     }
   }
 }
