@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { getDatabase, ref, set, update } from "@react-native-firebase/database";
+import { getDatabase, onValue, ref, set, update } from "@react-native-firebase/database";
 import {
   getAuth,
   onAuthStateChanged,
@@ -20,7 +20,7 @@ import {
 import MapView, { Marker } from "react-native-maps";
 import * as Location from "expo-location";
 import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
-import { SAMPLE_ORDERS, type DeliveryOrder } from "./src/data/orders";
+type DeliveryOrder = { id: string; displayId: string; customerName: string; address: string; itemsCount: number; codAmount: number; note: string; latitude: number | null; longitude: number | null; status: string; };
 
 type Screen = "login" | "orders" | "details" | "active";
 
@@ -51,9 +51,20 @@ function AppContent() {
   const [activeOrderId, setActiveOrderId] = useState<string | null>(null);
   const [locationText, setLocationText] = useState("Location not started");
   const [busy, setBusy] = useState(false);
+  const [assignedOrders, setAssignedOrders] = useState<DeliveryOrder[]>([]);
   const [completedIds, setCompletedIds] = useState<string[]>([]);
+  const activeOrder = assignedOrders.find((order) => order.id === activeOrderId) ?? null;
 
-  const activeOrder = SAMPLE_ORDERS.find((order) => order.id === activeOrderId);
+  useEffect(() => {
+    const user = getAuth().currentUser;
+    if (!user) { setAssignedOrders([]); return; }
+    const unsubscribe = onValue(ref(getDatabase(), "deliveryAssignments"), (snapshot) => {
+      const value = snapshot.val() as Record<string, any> | null;
+      const orders = Object.entries(value ?? {}).filter(([, item]) => item?.partnerUid === user.uid && item?.status !== "delivered" && item?.status !== "cancelled").map(([id, item]) => ({ id, displayId: String(item.displayId ?? item.orderNumber ?? id), customerName: String(item.customerName ?? "Customer details unavailable"), address: String(item.address ?? "Delivery address not provided"), itemsCount: Number(item.itemsCount ?? 0), codAmount: Number(item.codAmount ?? 0), note: String(item.note ?? "No delivery note"), latitude: typeof item.latitude === "number" ? item.latitude : null, longitude: typeof item.longitude === "number" ? item.longitude : null, status: String(item.status ?? "assigned") })).filter(order => !completedIds.includes(order.id));
+      setAssignedOrders(orders);
+    }, (error) => Alert.alert("Orders unavailable", error.message));
+    return unsubscribe;
+  }, [completedIds, authInitializing, screen]);
 
   useEffect(() => {
     let unsubscribe: (() => void) | undefined;
@@ -312,7 +323,7 @@ function AppContent() {
   }
 
   if (screen === "orders") {
-    const pending = SAMPLE_ORDERS.filter((order) => !completedIds.includes(order.id));
+    const pending = assignedOrders.filter((order) => !completedIds.includes(order.id));
     return (
       <SafeAreaView style={styles.safe}>
         <StatusBar barStyle="dark-content" />
@@ -349,8 +360,8 @@ function AppContent() {
               </View>
             </TouchableOpacity>
           ))}
-          {pending.length === 0 && <Text style={styles.empty}>No pending demo deliveries.</Text>}
-          <Text style={styles.disclaimer}>Sample orders are shown for development. They are not connected to SM mart's live order system.</Text>
+          {pending.length === 0 && <Text style={styles.empty}>No orders are currently assigned to you.</Text>}
+          <Text style={styles.disclaimer}>Orders appear here when the SM mart admin assigns them to your account.</Text>
           <TouchableOpacity onPress={handleSignOut}><Text style={styles.signOut}>Sign out</Text></TouchableOpacity>
         </ScrollView>
       </SafeAreaView>
