@@ -405,19 +405,15 @@ function AppContent() {
         <StatusBar barStyle="dark-content" />
         <Header title="Active delivery" />
         <View style={styles.mapWrap}>
-          <MapView
-            style={StyleSheet.absoluteFill}
-            initialRegion={{
-              latitude: activeOrder.latitude,
-              longitude: activeOrder.longitude,
-              latitudeDelta: 0.012,
-              longitudeDelta: 0.012,
-            }}
-            showsUserLocation
-            showsMyLocationButton
-          >
-            <Marker coordinate={{ latitude: activeOrder.latitude, longitude: activeOrder.longitude }} title="Customer location" />
-          </MapView>
+          {activeOrder.latitude !== null && activeOrder.longitude !== null ? (
+            <MapView style={StyleSheet.absoluteFill} initialRegion={{ latitude: activeOrder.latitude, longitude: activeOrder.longitude, latitudeDelta: 0.012, longitudeDelta: 0.012 }} showsUserLocation showsMyLocationButton>
+              <Marker coordinate={{ latitude: activeOrder.latitude, longitude: activeOrder.longitude }} title="Customer location" />
+            </MapView>
+          ) : (
+            <View style={{ flex: 1, alignItems: "center", justifyContent: "center", padding: 24 }}>
+              <Text style={styles.body}>Customer map coordinates are not included in this assignment yet.</Text>
+            </View>
+          )}
         </View>
         <View style={styles.activePanel}>
           <View style={styles.activeTop}>
