@@ -2,7 +2,7 @@
   "rules": {
     "deliverySessions": {
       "$orderId": {
-        ".read": "auth != null && data.child('partnerUid').val() === auth.uid",
+        ".read": "auth != null && (data.child('partnerUid').val() === auth.uid || auth.token.orderId === $orderId)",
         ".write": "auth != null && ((!data.exists() && newData.child('partnerUid').val() === auth.uid) || data.child('partnerUid').val() === auth.uid)",
         ".validate": "newData.hasChildren(['orderId', 'partnerUid', 'status'])",
         "partnerUid": {
