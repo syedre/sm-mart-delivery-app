@@ -55,6 +55,11 @@
           }
         }
       }
+    },
+    "deliveryAssignments": {
+      "$orderId": {
+        ".read": "auth != null && data.child('partnerUid').val() === auth.uid"
+      }
     }
   }
 }
