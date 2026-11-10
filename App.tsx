@@ -20,7 +20,7 @@ import {
 import MapView, { Marker } from "react-native-maps";
 import * as Location from "expo-location";
 import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
-type DeliveryOrder = { id: string; displayId: string; customerName: string; address: string; itemsCount: number; codAmount: number; note: string; latitude: number | null; longitude: number | null; status: string; };
+type DeliveryOrder = { id: string; displayId: string; address: string; itemsCount: number; codAmount: number; items: { id: string; name: string; unit: string; quantity: number; unitPrice: number }[]; latitude: number | null; longitude: number | null; status: string; };
 
 type Screen = "login" | "orders" | "details" | "active";
 
@@ -60,7 +60,26 @@ function AppContent() {
     if (!user) { setAssignedOrders([]); return; }
     const unsubscribe = onValue(ref(getDatabase(), "partnerAssignments/" + user.uid), (snapshot) => {
       const value = snapshot.val() as Record<string, any> | null;
-      const orders = Object.entries(value ?? {}).filter(([, item]) => item?.partnerUid === user.uid && item?.status !== "delivered" && item?.status !== "cancelled").map(([id, item]) => ({ id, displayId: String(item.displayId ?? item.orderNumber ?? id), customerName: String(item.customerName ?? "Customer details unavailable"), address: String(item.address ?? "Delivery address not provided"), itemsCount: Number(item.itemsCount ?? 0), codAmount: Number(item.codAmount ?? 0), note: String(item.note ?? "No delivery note"), latitude: typeof item.latitude === "number" ? item.latitude : null, longitude: typeof item.longitude === "number" ? item.longitude : null, status: String(item.status ?? "assigned") })).filter(order => !completedIds.includes(order.id));
+      const orders = Object.entries(value ?? {}).filter(([, item]) => item?.partnerUid === user.uid && item?.status !== "delivered" && item?.status !== "cancelled").map(([id, item]) => {
+        const items = Array.isArray(item.items) ? item.items.map((entry: any, index: number) => ({
+          id: String(entry.id ?? index),
+          name: String(entry.name ?? "Item"),
+          unit: String(entry.unit ?? ""),
+          quantity: Number(entry.quantity ?? 0),
+          unitPrice: Number(entry.unitPrice ?? 0),
+        })) : [];
+        return {
+          id,
+          displayId: String(item.displayId ?? item.orderNumber ?? id),
+          address: String(item.address ?? item.addressLabel ?? "Delivery address not provided"),
+          itemsCount: Number(item.itemsCount ?? items.reduce((sum: number, entry: { quantity: number }) => sum + entry.quantity, 0)),
+          codAmount: Number(item.codAmount ?? 0),
+          items,
+          latitude: typeof item.latitude === "number" ? item.latitude : null,
+          longitude: typeof item.longitude === "number" ? item.longitude : null,
+          status: String(item.status ?? "assigned"),
+        };
+      }).filter(order => !completedIds.includes(order.id));
       setAssignedOrders(orders);
     }, (error) => Alert.alert("Orders unavailable", error.message));
     return unsubscribe;
@@ -355,7 +374,6 @@ function AppContent() {
                 <Text style={styles.orderId}>{order.displayId}</Text>
                 <View style={styles.statusPill}><Text style={styles.statusText}>ASSIGNED</Text></View>
               </View>
-              <Text style={styles.customer}>{order.customerName}</Text>
               <Text style={styles.address} numberOfLines={2}>{order.address}</Text>
               <View style={styles.orderBottom}>
                 <Text style={styles.orderMeta}>{order.itemsCount} items · COD ₹{order.codAmount}</Text>
@@ -380,16 +398,22 @@ function AppContent() {
           <Text style={styles.eyebrow}>DELIVERY ORDER</Text>
           <Text style={styles.detailId}>{selectedOrder.displayId}</Text>
           <View style={styles.detailCard}>
-            <Text style={styles.label}>CUSTOMER</Text>
-            <Text style={styles.customer}>{selectedOrder.customerName}</Text>
+            <Text style={styles.label}>DELIVERY ADDRESS</Text>
             <Text style={styles.address}>{selectedOrder.address}</Text>
             <View style={styles.separator} />
-            <Text style={styles.label}>ORDER SUMMARY</Text>
-            <Text style={styles.body}>{selectedOrder.itemsCount} items</Text>
-            <Text style={styles.body}>Cash to collect: ₹{selectedOrder.codAmount}</Text>
+            <Text style={styles.label}>ORDER SUMMARY · {selectedOrder.itemsCount} ITEMS</Text>
+            {selectedOrder.items.length ? selectedOrder.items.map(item => (
+              <View key={item.id} style={styles.summaryRow}>
+                <Text style={styles.summaryName}>{item.quantity} × {item.name}{item.unit ? " (" + item.unit + ")" : ""}</Text>
+                <Text style={styles.summaryPrice}>₹{((item.unitPrice * item.quantity) / 100).toFixed(2)}</Text>
+              </View>
+            )) : <Text style={styles.body}>Item details unavailable for this assignment.</Text>}
             <View style={styles.separator} />
-            <Text style={styles.label}>DELIVERY NOTE</Text>
-            <Text style={styles.body}>{selectedOrder.note}</Text>
+            <Text style={styles.label}>CASH TO COLLECT</Text>
+            <Text style={styles.cashAmount}>₹{selectedOrder.codAmount.toFixed(2)}</Text>
+            {(selectedOrder.latitude === null || selectedOrder.longitude === null) && (
+              <Text style={styles.body}>Map coordinates unavailable. You can still proceed using the delivery address.</Text>
+            )}
           </View>
           <TouchableOpacity style={styles.primaryButton} disabled={busy} onPress={() => startDelivery(selectedOrder)}>
             {busy ? <ActivityIndicator color="#fff" /> : <Text style={styles.primaryButtonText}>Start delivery</Text>}
@@ -417,7 +441,7 @@ function AppContent() {
         </View>
         <View style={styles.activePanel}>
           <View style={styles.activeTop}>
-            <View><Text style={styles.eyebrow}>ON THE WAY</Text><Text style={styles.customer}>{activeOrder.customerName}</Text></View>
+            <View><Text style={styles.eyebrow}>ON THE WAY</Text><Text style={styles.customer}>Order #{activeOrder.displayId}</Text></View>
             <View style={styles.livePill}><Text style={styles.liveText}>GPS ON</Text></View>
           </View>
           <Text style={styles.address}>{activeOrder.address}</Text>
@@ -471,6 +495,10 @@ const styles = StyleSheet.create({
   customer: { color: COLORS.ink, fontSize: 16, fontWeight: "700", marginTop: 12 },
   address: { color: COLORS.muted, fontSize: 13, lineHeight: 19, marginTop: 5 },
   orderBottom: { borderTopWidth: 1, borderTopColor: COLORS.border, marginTop: 14, paddingTop: 12, flexDirection: "row", justifyContent: "space-between", alignItems: "center" },
+  summaryRow: { flexDirection: "row", justifyContent: "space-between", alignItems: "flex-start", paddingVertical: 7, gap: 12 },
+  summaryName: { flex: 1, color: COLORS.ink, fontSize: 13, lineHeight: 18 },
+  summaryPrice: { color: COLORS.ink, fontSize: 13, fontWeight: "600" },
+  cashAmount: { color: COLORS.primary, fontSize: 24, fontWeight: "800", marginTop: 4 },
   orderMeta: { color: COLORS.muted, fontSize: 11 },
   viewDetails: { color: COLORS.primary, fontSize: 12, fontWeight: "700" },
   disclaimer: { color: COLORS.muted, fontSize: 11, lineHeight: 16, marginTop: 20 },
