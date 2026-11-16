@@ -1,6 +1,6 @@
 # Firebase live delivery tracking
 
-This feature uses only the separate `sm-delivery-app-10f03` Firebase project and its Realtime Database. It does not connect to the SM mart customer app, Supabase, Render, or the production order backend.
+GPS tracking and partner assignments use the separate `sm-delivery-app-10f03` Firebase project. When a partner completes a real assigned order, the app also calls the `complete-delivery` Supabase Edge Function to update the production `orders` row. The customer app itself is not modified; the function is deployed separately in the customer app repository.
 
 ## Realtime Database path
 
@@ -50,3 +50,17 @@ These rules allow an authenticated delivery partner to read and write only a ses
 4. Select **Mark as delivered**. The session status should change to `delivered` and `tracking.active` to `false`.
 
 The app still uses local sample orders. No real customer order is assigned, and no customer-facing tracking screen is included in this stage.
+
+
+## Production order completion
+
+The delivery app invokes the `complete-delivery` Supabase Edge Function before stopping Firebase tracking. It sends the active order UUID and the signed-in partner's Firebase ID token. The function verifies the token, verifies the partner's own `partnerAssignments/{uid}/{orderId}` record, and only transitions a Supabase order from `out_for_delivery` to `delivered`. It also marks COD payment as `paid`.
+
+Configure these public values in the delivery app's local `.env` (copy them from the customer app's existing `.env`):
+
+```dotenv
+EXPO_PUBLIC_SUPABASE_URL=https://jabzndbdybeeugoypboz.supabase.co
+EXPO_PUBLIC_SUPABASE_PUBLISHABLE_KEY=your_existing_sb_publishable_key
+```
+
+Do not add a Supabase service-role key to the app. Deploy and configure the Edge Function using `DELIVERY_COMPLETION_SETUP.md` in the customer app repository. The Supabase order UUID must be the same key used by `partnerAssignments/{partnerUid}/{orderId}`; demo IDs are rejected.
