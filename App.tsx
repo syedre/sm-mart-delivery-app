@@ -262,15 +262,56 @@ function AppContent() {
   const completeDelivery = async () => {
     if (!activeOrderId) return;
     setBusy(true);
+    let productionOrderCompleted = false;
     try {
+      const user = getAuth().currentUser;
+      if (!user) {
+        throw new Error("Your delivery partner session has expired. Sign in again.");
+      }
+
+      const supabaseUrl = process.env.EXPO_PUBLIC_SUPABASE_URL?.trim();
+      const supabasePublishableKey = process.env.EXPO_PUBLIC_SUPABASE_PUBLISHABLE_KEY?.trim();
+      if (!supabaseUrl || !supabasePublishableKey) {
+        throw new Error("Production order sync is not configured on this build.");
+      }
+
+      // Send the existing Firebase identity to the server. The service-role
+      // key is never included in the app.
+      const firebaseIdToken = await user.getIdToken();
+      const response = await fetch(
+        `${supabaseUrl.replace(/\\/$/, "")}/functions/v1/complete-delivery`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            apikey: supabasePublishableKey,
+            Authorization: `Bearer ${firebaseIdToken}`,
+          },
+          body: JSON.stringify({ orderId: activeOrderId }),
+        }
+      );
+      const result = await response.json().catch(() => ({})) as {
+        success?: boolean;
+        error?: string;
+      };
+      if (!response.ok || result.success !== true) {
+        throw new Error(result.error || "The customer order could not be marked as delivered.");
+      }
+      productionOrderCompleted = true;
+
+      // Keep the existing Firebase tracking and assignment updates after the
+      // production order update has been confirmed.
       await update(ref(getDatabase(), `/deliverySessions/${activeOrderId}`), {
         status: "delivered",
         completedAt: Date.now(),
         lastUpdatedAt: Date.now(),
         tracking: { active: false },
       });
-      const user = getAuth().currentUser;
-      if (user) await update(ref(getDatabase(), "partnerAssignments/" + user.uid + "/" + activeOrderId), { status: "delivered" });
+      await update(
+        ref(getDatabase(), "partnerAssignments/" + user.uid + "/" + activeOrderId),
+        { status: "delivered" }
+      );
+
       setCompletedIds((current) => [...current, activeOrderId]);
       setActiveOrderId(null);
       setSelectedOrder(null);
@@ -278,10 +319,16 @@ function AppContent() {
       setScreen("orders");
       Alert.alert(
         "Delivery completed",
-        "The delivery status was saved to the separate SM mart Delivery Firebase database. No customer-app or production order data was changed."
+        "The customer order is marked delivered, COD payment is marked paid, and live tracking has been stopped."
       );
-    } catch {
-      Alert.alert("Update failed", "Could not save the delivery status. Check your connection and try again.");
+    } catch (error) {
+      const message = error instanceof Error ? error.message : "Please check your connection and try again.";
+      Alert.alert(
+        productionOrderCompleted ? "Tracking sync incomplete" : "Update failed",
+        productionOrderCompleted
+          ? "The customer order is already marked delivered, but Firebase tracking could not finish. Tap Mark as delivered again to safely retry. " + message
+          : message
+      );
     } finally {
       setBusy(false);
     }
