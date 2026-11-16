@@ -279,7 +279,7 @@ function AppContent() {
       // key is never included in the app.
       const firebaseIdToken = await user.getIdToken();
       const response = await fetch(
-        `${supabaseUrl.replace(/\\/$/, "")}/functions/v1/complete-delivery`,
+        `${supabaseUrl.endsWith("/") ? supabaseUrl.slice(0, -1) : supabaseUrl}/functions/v1/complete-delivery`,
         {
           method: "POST",
           headers: {
