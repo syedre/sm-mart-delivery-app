@@ -5,9 +5,8 @@ A separate Expo React Native app for SM mart delivery partners.
 ## Isolation and safety
 
 - This repository is independent of the SM mart customer app.
-- It does not connect to the production Supabase project or production order APIs.
-- It does not change Supabase schemas, migrations, Edge Functions, webhooks, or the Render catalog socket.
-- Sample orders remain local demo data until a separately approved integration is designed.
+- It does not connect directly to Supabase from the mobile client. Production order completion is sent to a narrowly scoped Supabase Edge Function using the partner's Firebase ID token.
+- It does not change the customer app's screens, dependencies, authentication, database schema, webhooks, or Render catalog socket.
 
 ## Firebase setup
 
@@ -31,7 +30,7 @@ Firebase client configuration is not a substitute for database security rules. N
 - Local sample assigned orders.
 - Order details and COD summary.
 - Foreground GPS display on the delivery partner's device.
-- Local demo completion flow.
+- Production order completion through the secure Edge Function, followed by the existing Firebase tracking/assignment updates.
 
 ## Not yet enabled
 
